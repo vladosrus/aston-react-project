@@ -1,30 +1,36 @@
-# React + TypeScript + Vite
+![CI/CD Actions](https://github.com/vladosrus/aston-react-project/actions/workflows/actions.yml/badge.svg?event=push)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Проект
 
-Currently, two official plugins are available:
+## Что выполнено:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1 уровень (обязательный - необходимый минимум)
 
-## Expanding the ESLint configuration
+- [ ] Реализованы `Требования к функциональности`
+- [ ] Для хранения учетных записей пользователей, их Избранного и Истории поиска, используется `LocalStorage`
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### React
 
-- Configure the top-level `parserOptions` property like this:
+- [ ] Используются функциональные компоненты c хуками в приоритете над классовыми
+- [ ] Есть разделение на `умные` и `глупые компоненты`: [Пример умного](https://github.com/), [Пример глупого](https://github.com/)
+- [ ] Есть `рендеринг списков`: [Пример](https://github.com/)
+- [ ] Реализована хотя бы одна `форма`: [Пример](https://github.com/)
+- [ ] Есть применение `Контекст API`: [Пример](https://github.com/)
+- [ ] Есть применение `предохранителя`: [Пример](https://github.com/)
+- [ ] Есть хотя бы один `кастомный хук`: [Пример](https://github.com/)
+- [ ] Несколько компонентов используют `PropTypes`: [2-3 Примера](https://github.com/)
+- [ ] Поиск не должен триггерить много запросов к серверу (`debounce`): [Пример](https://github.com/)
+- [ ] Есть применение `lazy + Suspense`: [Примеры](https://github.com/)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname
-  }
-};
-```
+#### Redux
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- [ ] Используется `Modern Redux with Redux Toolkit`: [Пример](https://github.com/)
+- [ ] Используются `слайсы`: [Пример](https://github.com/)
+- [ ] Есть `кастомная мидлвара`: [Пример](https://github.com/)
+- [ ] Используется `RTK Query`: [Пример](https://github.com/)
+- [ ] Используется `Transforming Responses`: [Пример](https://github.com/)
+
+### 2 уровень (необязательный)
+
+- [x] Используется `TypeScript`
+- [x] Настроен `CI/CD` при помощи `GitHub Actions` + `GitHub Pages`
