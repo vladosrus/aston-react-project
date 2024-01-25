@@ -10,7 +10,7 @@ export function App() {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/aston-react-project"
         element={
           <>
             <div>
