@@ -1,18 +1,57 @@
-name: GitHub Actions
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: CI/CD Actions
+
+on: # запускать процессы при push и pull_request в ветку main
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  Explore-GitHub-Actions:
+  CI: # здесь буду выполняться проверки линтерами и тесты
+    name: Continuous Integration
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['21.x']
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
+      - name: Проверяем код репозитория
         uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+
+      - name: Настраиваем Node.js версии ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Устанавливаем зависимости
+        run: npm ci
+      # Проверки кодстайла
+      - name: Проверка Prettier
+        run: npm run lint:prettier
+      - name: Проверка Eslint
+        run: npm run lint:eslint
+      # Тесты
+
+  CD: # эта часть отвечает за развёртывание приложения
+    name: Continuous Deployment
+    needs: CI
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['21.x']
+    steps:
+      - name: Проверяем код репозитория
+        uses: actions/checkout@v4
+
+      - name: Настраиваем Node.js версии ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Устанавливаем зависимости
+        run: npm ci
+
+      - name: Создаём build и отправляем его на сайт
+        run: npm run deploy
