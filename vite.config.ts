@@ -5,5 +5,6 @@ import react from '@vitejs/plugin-react';
 //Здесь важен именно экспорт по умолчанию для работы приложения
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
+  base: '/aston-react-project',
   plugins: [react()]
 });
