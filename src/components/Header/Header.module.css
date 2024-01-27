@@ -1,0 +1,98 @@
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.container {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 30px 16px;
+}
+.logoLink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: unset;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.logoLink:hover {
+  transform: scale(1.05);
+}
+.logoImg {
+  width: 31px;
+  height: 31px;
+  background-image: url(../../../src/assets/unsplash_icon_black.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.logoText {
+  margin: 0px;
+  font-size: 20px;
+  line-height: normal;
+}
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 60px;
+  background-color: #fff;
+}
+.navLink {
+  font-size: 20px;
+  line-height: normal;
+  text-decoration: none;
+  color: unset;
+  transition: transform 0.4s ease;
+}
+.navLink:hover {
+  transform: scale(1.1);
+}
+.navLinkActive {
+  composes: navLink;
+  border-bottom: 2px solid #7466e1;
+}
+.themeButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 0px 20px;
+}
+.themeButton {
+  width: 24px;
+  height: 24px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.themeButton:hover {
+  transform: scale(1.2);
+}
+.lightThemeButton {
+  background-image: url(../../assets/light_theme_icon.svg);
+  composes: themeButton;
+}
+.lightThemeButtonActive {
+  background-image: url(../../assets/light_theme_icon_active.svg);
+  composes: themeButton;
+}
+.darkThemeButton {
+  background-image: url(../../assets/dark_theme_icon.svg);
+  composes: themeButton;
+}
+.darkThemeButtonActive {
+  background-image: url(../../assets/dark_theme_icon_active.svg);
+  composes: themeButton;
+}
