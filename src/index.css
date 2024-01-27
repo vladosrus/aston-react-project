@@ -1,2 +1,10 @@
 @import url(../src/utils/normalize.css);
 @import url(../src/utils/fonts/index.css);
+
+#root {
+  font-family: 'Open Sans';
+  font-weight: 400;
+}
+main {
+  margin-top: 150px;
+}

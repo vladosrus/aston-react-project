@@ -1,10 +1,13 @@
 import { Outlet } from 'react-router-dom';
+import { Header } from '../Header/Header';
 
 export function BaseLayout() {
   return (
     <>
-      <header>Header</header>
-      <Outlet />
+      <Header />
+      <main>
+        <Outlet />
+      </main>
       <footer>Footer</footer>
     </>
   );
