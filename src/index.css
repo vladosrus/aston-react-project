@@ -4,7 +4,18 @@
 #root {
   font-family: 'Open Sans';
   font-weight: 400;
+  background-color: #fff;
 }
-main {
-  margin-top: 150px;
+:root {
+  --base-width: 1280px;
+
+  --light-theme-accent-color: #7466e1;
+  --light-theme-background-color: #fff;
+  --light-theme-text-color: #000;
+
+  --dark-theme-accent-color: #00ffc2;
+  --dark-theme-accent-background-color: #01221a;
+  --dark-theme-background-color: #000;
+  --dark-theme-text-color: #000;
+  --dark-theme-title-color: #e4e4e4;
 }

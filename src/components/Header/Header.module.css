@@ -3,9 +3,11 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 999;
+  background-color: var(--light-theme-background-color);
 }
 .container {
-  max-width: 1280px;
+  max-width: var(--base-width);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -44,7 +46,6 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 60px;
-  background-color: #fff;
 }
 .navLink {
   font-size: 20px;
@@ -58,7 +59,7 @@
 }
 .navLinkActive {
   composes: navLink;
-  border-bottom: 2px solid #7466e1;
+  border-bottom: 2px solid var(--light-theme-accent-color);
 }
 .themeButtonsContainer {
   display: flex;
