@@ -40,6 +40,7 @@ export function Header() {
               [s.lightThemeButtonActive]: theme === 'light'
             })}
             onClick={() => setTheme('light')}
+            title="Изменить оформление страницы на светлое"
           />
           <button
             type="button"
@@ -47,6 +48,7 @@ export function Header() {
               [s.darkThemeButtonActive]: theme === 'dark'
             })}
             onClick={() => setTheme('dark')}
+            title="Изменить оформление страницы на тёмное"
           />
         </div>
       </div>

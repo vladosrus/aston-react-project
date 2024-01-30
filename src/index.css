@@ -2,7 +2,7 @@
 @import url(../src/utils/fonts/index.css);
 
 #root {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   background-color: #fff;
 }
