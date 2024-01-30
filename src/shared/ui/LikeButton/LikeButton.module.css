@@ -1,0 +1,21 @@
+.likeButton {
+  width: 32px;
+  height: 32px;
+  padding: 0px;
+  border: none;
+  cursor: pointer;
+  background-color: inherit;
+  background-image: url(../assets/likeButton.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.likeButton:hover {
+  transform: scale(1.1);
+}
+
+.likeButtonActive {
+  compouses: likeButton;
+  background-image: url(../assets/likeButton_active.svg);
+}

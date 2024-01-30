@@ -42,13 +42,11 @@ module.exports = {
         ]
       }
     ],
+    'react/display-name': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/self-closing-comp': 'error',
     'react/jsx-uses-react': 'off',
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true }
-    ]
+    'react-refresh/only-export-components': 'off'
   }
 };
