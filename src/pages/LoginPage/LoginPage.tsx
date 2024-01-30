@@ -1,11 +1,12 @@
 import { memo } from 'react';
 import './LoginPage.module.css';
+import { Section } from '../../shared/ui/Section/Section';
 
 const LoginPage = memo(() => {
   return (
     <>
-      <p>sdfs</p>
-      <span>dfsdf</span>
+      <Section type="top" />
+      <Section type="main" />
     </>
   );
 });
