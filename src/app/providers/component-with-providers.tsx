@@ -1,3 +1,4 @@
+import { RouterProvider } from './router-provider';
 import { StoreProvider } from './store-provider';
 
 type Prop = {
@@ -5,5 +6,9 @@ type Prop = {
 };
 
 export function ComponentWithProviders({ children }: Prop) {
-  return <StoreProvider>{children}</StoreProvider>;
+  return (
+    <StoreProvider>
+      <RouterProvider>{children}</RouterProvider>
+    </StoreProvider>
+  );
 }

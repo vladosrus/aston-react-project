@@ -31,7 +31,7 @@
 .logoImg {
   width: 31px;
   height: 31px;
-  background-image: url(../../../src/assets/unsplash_icon_black.svg);
+  background-image: url(../../shared/ui/assets/unsplash_icon_black.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -82,18 +82,18 @@
   transform: scale(1.2);
 }
 .lightThemeButton {
-  background-image: url(../../assets/light_theme_icon.svg);
+  background-image: url(../../shared/ui/assets/light_theme_icon.svg);
   composes: themeButton;
 }
 .lightThemeButtonActive {
-  background-image: url(../../assets/light_theme_icon_active.svg);
+  background-image: url(../../shared/ui/assets/light_theme_icon_active.svg);
   composes: themeButton;
 }
 .darkThemeButton {
-  background-image: url(../../assets/dark_theme_icon.svg);
+  background-image: url(../../shared/ui/assets/dark_theme_icon.svg);
   composes: themeButton;
 }
 .darkThemeButtonActive {
-  background-image: url(../../assets/dark_theme_icon_active.svg);
+  background-image: url(../../shared/ui/assets/dark_theme_icon_active.svg);
   composes: themeButton;
 }
