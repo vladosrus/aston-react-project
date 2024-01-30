@@ -1,8 +1,14 @@
 import { memo } from 'react';
 import './RegistrationPage.module.css';
+import { Section } from '../../shared/ui/Section/Section';
 
 const RegistrationPage = memo(() => {
-  return <p>RegistrationPage</p>;
+  return (
+    <>
+      <Section type="top" />
+      <Section type="main" />
+    </>
+  );
 });
 
 // Без дефолтного эспорта будут громоздкие импорты для lazy
