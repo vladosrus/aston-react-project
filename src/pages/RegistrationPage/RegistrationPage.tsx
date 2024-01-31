@@ -1,12 +1,15 @@
 import { memo } from 'react';
 import './RegistrationPage.module.css';
 import { Section } from '../../shared/ui/Section/Section';
+import { AuthForm } from '../../widgets/AuthForm/AuthForm';
 
 const RegistrationPage = memo(() => {
   return (
     <>
       <Section type="top" />
-      <Section type="main" />
+      <Section type="main">
+        <AuthForm name="Регистрация" />
+      </Section>
     </>
   );
 });

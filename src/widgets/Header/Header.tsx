@@ -22,7 +22,7 @@ export function Header() {
               !isActive ? s.navLink : s.navLinkActive
             }
           >
-            Login
+            Авторизация
           </NavLink>
           <NavLink
             to={paths.registrationPage}
@@ -30,7 +30,7 @@ export function Header() {
               !isActive ? s.navLink : s.navLinkActive
             }
           >
-            Registration
+            Регистрация
           </NavLink>
         </div>
         <div className={s.themeButtonsContainer}>
