@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import clsx from 'clsx';
 import s from './SearchForm.module.css';
 
-export function SearchForm() {
+export const SearchForm = memo(() => {
   //TODO: Временное решение для показа текста ошибки
   const [error, setError] = useState(false);
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>): void {
@@ -12,10 +12,12 @@ export function SearchForm() {
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
-      <label className={s.inputContainer}>
+      <label htmlFor="search" className={s.inputContainer}>
         <input
           className={s.input}
           type="text"
+          id="search"
+          name="search"
           placeholder="Введите ключевое слово(а) для поиска фото"
         />
         <span
@@ -32,4 +34,4 @@ export function SearchForm() {
       </button>
     </form>
   );
-}
+});

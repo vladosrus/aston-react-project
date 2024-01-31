@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import './LoginPage.module.css';
 import { Section } from '../../shared/ui/Section/Section';
 import { AuthForm } from '../../widgets/AuthForm/AuthForm';
 
