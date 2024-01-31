@@ -1,0 +1,53 @@
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: var(--light-theme-background-color);
+}
+.container {
+  max-width: var(--base-width);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 30px 16px;
+}
+.themeButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 0px 20px;
+}
+.themeButton {
+  width: 24px;
+  height: 24px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.themeButton:hover {
+  transform: scale(1.2);
+}
+.lightThemeButton {
+  background-image: url(../../../shared/ui/assets/light_theme_icon.svg);
+  composes: themeButton;
+}
+.lightThemeButtonActive {
+  background-image: url(../../../shared/ui/assets/light_theme_icon_active.svg);
+  composes: themeButton;
+}
+.darkThemeButton {
+  background-image: url(../../../shared/ui/assets/dark_theme_icon.svg);
+  composes: themeButton;
+}
+.darkThemeButtonActive {
+  background-image: url(../../../shared/ui/assets/dark_theme_icon_active.svg);
+  composes: themeButton;
+}

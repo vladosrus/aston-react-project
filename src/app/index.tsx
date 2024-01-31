@@ -1,5 +1,4 @@
-import './App.module.css';
-import { Routing } from '../pages/routing/routing';
+import { Routing } from '../pages';
 import { ComponentWithProviders } from './providers';
 
 export function App() {

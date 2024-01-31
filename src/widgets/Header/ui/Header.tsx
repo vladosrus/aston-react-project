@@ -1,38 +1,18 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { memo, useState } from 'react';
 import clsx from 'clsx';
-import { paths } from '../../shared/model/paths';
 import s from './Header.module.css';
+import { Logo } from './Logo/Logo';
+import { Navigation } from './Navigation/Navigation';
 
-export function Header() {
+export const Header = memo(() => {
   // Временное решение для переключения темы
   const [theme, setTheme] = useState('light');
 
   return (
     <header className={s.header}>
       <div className={s.container}>
-        <Link to={paths.homePage} className={s.logoLink}>
-          <div className={s.logoImg} />
-          <h1 className={s.logoText}>Фото by Unsplash</h1>
-        </Link>
-        <div className={s.navContainer}>
-          <NavLink
-            to={paths.loginPage}
-            className={({ isActive }) =>
-              !isActive ? s.navLink : s.navLinkActive
-            }
-          >
-            Авторизация
-          </NavLink>
-          <NavLink
-            to={paths.registrationPage}
-            className={({ isActive }) =>
-              !isActive ? s.navLink : s.navLinkActive
-            }
-          >
-            Регистрация
-          </NavLink>
-        </div>
+        <Logo />
+        <Navigation />
         <div className={s.themeButtonsContainer}>
           <button
             type="button"
@@ -54,4 +34,4 @@ export function Header() {
       </div>
     </header>
   );
-}
+});
