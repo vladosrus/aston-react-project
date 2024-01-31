@@ -11,7 +11,8 @@
 
   --light-theme-accent-color: #7466e1;
   --light-theme-background-color: #fff;
-  --light-theme-text-color: #000;
+  --light-theme-black-text-color: #000;
+  --light-theme-white-text-color: #fff;
 
   --dark-theme-accent-color: #00ffc2;
   --dark-theme-accent-background-color: #01221a;
