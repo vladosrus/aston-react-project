@@ -1,0 +1,72 @@
+.title {
+  margin: 0;
+  margin-bottom: 30px;
+  padding-top: 20px;
+}
+.list {
+  margin: 0;
+  margin-bottom: 40px;
+  padding: 0;
+  max-width: 700px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(110px, 300px));
+  gap: 10px;
+}
+.listItem {
+  position: relative;
+  max-width: 300px;
+  list-style: none;
+  border-radius: 10px;
+  border: 1px solid var(--light-theme-accent-color);
+  transition: transform 0.4s ease;
+}
+.listItem:hover {
+  transform: scale(0.97);
+}
+.link {
+  padding: 10px 35px 10px 10px;
+  display: flex;
+  text-decoration: none;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+.text {
+  line-height: 26px;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--light-theme-black-text-color);
+}
+.icon {
+  min-width: 32px;
+  min-height: 32px;
+}
+.button {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
+.button:hover {
+  transform: scale(1.2);
+}
+
+.deleteButton {
+  color: var(--light-theme-white-text-color);
+  background-color: var(--light-theme-accent-color);
+  border: none;
+  padding: 20px 40px;
+  border-radius: 10px;
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  transform: scale(1.05);
+}

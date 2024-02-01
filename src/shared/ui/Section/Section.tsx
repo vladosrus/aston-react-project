@@ -8,7 +8,7 @@ export const Section = memo(({ type, children }: Props) => {
   return (
     <section
       className={clsx({
-        [s.photoSection]: type === 'main',
+        [s.mainSection]: type === 'main',
         [s.topSection]: type === 'top'
       })}
     >
