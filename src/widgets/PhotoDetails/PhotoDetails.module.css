@@ -1,0 +1,33 @@
+.article {
+  max-width: 92%;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+.img {
+  max-width: 70%;
+  object-fit: cover;
+  border-radius: 25px;
+}
+.descriptionList {
+  min-width: 185px;
+  margin: 0;
+  padding: 0;
+}
+.descriptionListItem {
+  list-style: none;
+}
+.category {
+  color: gray;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+.description {
+  margin: 0 0 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.link {
+  text-decoration: none;
+  color: var(--light-theme-black-text-color);
+}
