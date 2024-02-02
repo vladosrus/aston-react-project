@@ -1,8 +1,8 @@
 import { memo, useState } from 'react';
 import clsx from 'clsx';
-import s from './Header.module.css';
-import { Logo } from './Logo/Logo';
-import { Navigation } from './Navigation/Navigation';
+import s from './header.module.css';
+import { Logo } from './logo/logo';
+import { Navigation } from './navigation/navigation';
 
 export const Header = memo(() => {
   // Временное решение для переключения темы

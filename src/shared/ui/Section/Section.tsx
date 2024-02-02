@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import clsx from 'clsx';
-import s from './Section.module.css';
+import s from './section.module.css';
 
 type Props = { type: 'main' | 'top'; children?: JSX.Element };
 

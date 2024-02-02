@@ -2,7 +2,7 @@ import { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
-import s from './AuthForm.module.css';
+import s from './auth-form.module.css';
 
 type Props = {
   name: 'Авторизация' | 'Регистрация';

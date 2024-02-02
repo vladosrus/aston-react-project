@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import s from './LikeButton.module.css';
+import s from './like-button.module.css';
 
 export function LikeButton() {
   //Временное решение

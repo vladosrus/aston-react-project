@@ -1,8 +1,8 @@
 import { ReactNode, memo } from 'react';
-import { PhotoInfo } from '../../pages/DetailsPage/DetailsPage';
-import { LikeButton } from '../../shared/ui/LikeButton/LikeButton';
+import { PhotoInfo } from '../../pages/details-page/details-page';
+import { LikeButton } from '../../shared/ui/like-button/like-button';
 
-import s from './PhotoDetails.module.css';
+import s from './photo-details.module.css';
 
 export const PhotoDetails = memo(({ photoInfo }: { photoInfo: PhotoInfo }) => {
   const photoDescription: {

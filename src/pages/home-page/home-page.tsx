@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import { SearchForm } from '../../widgets/SearchForm/SearchForm';
-import { Section } from '../../shared/ui/Section/Section';
-import { PhotoList } from '../../widgets/PhotoList/PhotoList';
+import { SearchForm } from '../../widgets/search-form/search-form';
+import { Section } from '../../shared/ui/section/section';
+import { PhotoList } from '../../widgets/photo-list/photo-list';
 
 export interface PhotoInfo {
   id: string;
@@ -981,6 +981,6 @@ const HomePage = memo(() => {
   );
 });
 
-// Без дефолтного эспорта будут громоздкие импорты для lazy
+// Без дефолтного экспорта будут громоздкие импорты для lazy
 // eslint-disable-next-line import/no-default-export
 export default HomePage;

@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { PhotoInfo } from '../../pages/HomePage/HomePage';
-import { LikeButton } from '../../shared/ui/LikeButton/LikeButton';
-import s from './PhotoList.module.css';
+import { PhotoInfo } from '../../pages/home-page/home-page';
+import { LikeButton } from '../../shared/ui/like-button/like-button';
+import s from './photo-list.module.css';
 
 type Props = {
   list: PhotoInfo[];

@@ -1,5 +1,5 @@
 @import url(./normalize.css);
-@import url(./fonts/index.css);
+@import url(./fonts);
 
 #root {
   font-family: 'Open Sans', sans-serif;

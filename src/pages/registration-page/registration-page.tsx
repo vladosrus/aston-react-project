@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { Section } from '../../shared/ui/Section/Section';
-import { AuthForm } from '../../widgets/AuthForm/AuthForm';
+import { Section } from '../../shared/ui/section/section';
+import { AuthForm } from '../../widgets/auth-form/auth-form';
 
 const RegistrationPage = memo(() => {
   return (
@@ -13,6 +13,6 @@ const RegistrationPage = memo(() => {
   );
 });
 
-// Без дефолтного эспорта будут громоздкие импорты для lazy
+// Без дефолтного экспорта будут громоздкие импорты для lazy
 // eslint-disable-next-line import/no-default-export
 export default RegistrationPage;

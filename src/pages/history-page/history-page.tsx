@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { Section } from '../../shared/ui/Section/Section';
-import { HistoryList } from '../../widgets/HistoryList/HistoryList';
+import { Section } from '../../shared/ui/section/section';
+import { HistoryList } from '../../widgets/history-list/history-list';
 
 const historyList: string[] = [
   'котики',
@@ -26,6 +26,6 @@ const HistoryPage = memo(() => {
   );
 });
 
-// Без дефолтного эспорта будут громоздкие импорты для lazy
+// Без дефолтного экспорта будут громоздкие импорты для lazy
 // eslint-disable-next-line import/no-default-export
 export default HistoryPage;

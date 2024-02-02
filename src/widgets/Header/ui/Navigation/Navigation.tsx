@@ -1,9 +1,9 @@
 import { memo, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-import s from './Navigation.module.css';
-import { navLinksForGuest, navLinksForUser } from './model/navLinksLists';
-import type { NavLinkInfo } from './model/navLinksLists';
+import s from './navigation.module.css';
+import { navLinksForGuest, navLinksForUser } from './model/nav-links-lists';
+import type { NavLinkInfo } from './model/nav-links-lists';
 
 export const Navigation = memo(() => {
   // Временное решение для проверки авторизации

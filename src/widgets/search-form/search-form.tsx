@@ -1,6 +1,6 @@
 import { memo, useState } from 'react';
 import clsx from 'clsx';
-import s from './SearchForm.module.css';
+import s from './search-form.module.css';
 
 export const SearchForm = memo(() => {
   //TODO: Временное решение для показа текста ошибки

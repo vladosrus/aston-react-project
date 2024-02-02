@@ -1,6 +1,6 @@
 import { memo } from 'react';
-import { Section } from '../../shared/ui/Section/Section';
-import { PhotoDetails } from '../../widgets/PhotoDetails/PhotoDetails';
+import { Section } from '../../shared/ui/section/section';
+import { PhotoDetails } from '../../widgets/photo-details/photo-details';
 
 export interface PhotoInfo {
   id: string;
