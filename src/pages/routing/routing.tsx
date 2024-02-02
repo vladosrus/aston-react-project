@@ -2,17 +2,17 @@ import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { paths } from '../../shared/model/paths';
 
-const HomePage = lazy(() => import('../HomePage/HomePage'));
-const BaseLayout = lazy(() => import('../../widgets/BaseLayout/BaseLayout'));
-const LoginPage = lazy(() => import('../LoginPage/LoginPage'));
+const HomePage = lazy(() => import('../home-page/home-page'));
+const BaseLayout = lazy(() => import('../../widgets/base-layout/base-layout'));
+const LoginPage = lazy(() => import('../login-page/login-page'));
 const RegistrationPage = lazy(
-  () => import('../RegistrationPage/RegistrationPage')
+  () => import('../registration-page/registration-page')
 );
-const DetailsPage = lazy(() => import('../DetailsPage/DetailsPage'));
-const SearchPage = lazy(() => import('../SearchPage/SearchPage'));
-const HistoryPage = lazy(() => import('../HistoryPage/HistoryPage'));
-const FavoritesPage = lazy(() => import('../FavoritesPage/FavoritesPage'));
-const NotFoundPage = lazy(() => import('../NotFoundPage/NotFoundPage'));
+const DetailsPage = lazy(() => import('../details-page/details-page'));
+const SearchPage = lazy(() => import('../search-page/search-page'));
+const HistoryPage = lazy(() => import('../history-page/history-page'));
+const FavoritesPage = lazy(() => import('../favorites-page/favorites-page'));
+const NotFoundPage = lazy(() => import('../not-found-page/not-found-page'));
 
 export function Routing() {
   return (

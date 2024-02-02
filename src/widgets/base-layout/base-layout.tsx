@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from '../Header/ui/Header';
-import { Footer } from '../Footer/Footer';
-import s from './BaseLayout.module.css';
+import { Header } from '../header/ui/header';
+import { Footer } from '../footer/footer';
+import s from './base-layout.module.css';
 
 const BaseLayout = memo(() => {
   return (

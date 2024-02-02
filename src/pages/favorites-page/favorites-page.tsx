@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import { Section } from '../../shared/ui/Section/Section';
-import { PhotoList } from '../../widgets/PhotoList/PhotoList';
-import { PhotoInfo } from '../HomePage/HomePage';
+import { Section } from '../../shared/ui/section/section';
+import { PhotoList } from '../../widgets/photo-list/photo-list';
+import { PhotoInfo } from '../home-page/home-page';
 
 const favouritesList: PhotoInfo[] = [
   {
@@ -280,6 +280,6 @@ const FavoritesPage = memo(() => {
   );
 });
 
-// Без дефолтного эспорта будут громоздкие импорты для lazy
+// Без дефолтного экспорта будут громоздкие импорты для lazy
 // eslint-disable-next-line import/no-default-export
 export default FavoritesPage;

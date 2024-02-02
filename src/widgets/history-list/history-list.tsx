@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { paths } from '../../shared/model/paths';
 import SearchIcon from '../../shared/ui/assets/search_icon.svg?react';
 import DeleteIcon from '../../shared/ui/assets/delete_icon.svg?react';
-import s from './HistoryList.module.css';
+import s from './history-list.module.css';
 
 export const HistoryList = memo(({ history }: { history: string[] }) => {
   return (
