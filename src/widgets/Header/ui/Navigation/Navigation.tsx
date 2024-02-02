@@ -7,7 +7,7 @@ import type { NavLinkInfo } from './model/navLinksLists';
 
 export const Navigation = memo(() => {
   // Временное решение для проверки авторизации
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth] = useState(true);
 
   function renderLinkList(linksList: NavLinkInfo[]) {
     return linksList.map((navLink) => {
