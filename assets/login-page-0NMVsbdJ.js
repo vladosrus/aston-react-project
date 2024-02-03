@@ -1,0 +1,1 @@
+import{r as o,j as r}from"./index-fsviV91t.js";import{S as t}from"./section-CpCvWzDY.js";import{A as e}from"./auth-form-lOImKZj8.js";import"./clsx-Zbgk8kpT.js";const n=o.memo(()=>r.jsxs(r.Fragment,{children:[r.jsx(t,{type:"top"}),r.jsx(t,{type:"main",children:r.jsx(e,{name:"Авторизация"})})]}));export{n as default};
