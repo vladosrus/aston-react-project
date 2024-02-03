@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from '../header/ui/header';
-import { Footer } from '../footer/footer';
+import { Footer } from '../Footer/footer';
 import s from './base-layout.module.css';
 
 const BaseLayout = memo(() => {
@@ -16,6 +16,6 @@ const BaseLayout = memo(() => {
   );
 });
 
-// Без дефолтного эспорта будут громоздкие импорты для lazy
+// Без дефолтного экспорта будут громоздкие импорты для lazy
 // eslint-disable-next-line import/no-default-export
 export default BaseLayout;
