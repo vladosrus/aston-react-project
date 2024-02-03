@@ -41,13 +41,14 @@
 }
 .errorMessage {
   color: #ee3465;
-  visibility: visible;
+  visibility: hidden;
   font-size: 12px;
   font-weight: 400;
   line-height: 14px;
+  min-height: 14px;
 }
 .errorMessageVisible {
-  visibility: hidden;
+  visibility: visible;
 }
 .button {
   width: 100%;
