@@ -1,5 +1,6 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import clsx from 'clsx';
 
 import s from './auth-form.module.css';
@@ -7,36 +8,51 @@ import s from './auth-form.module.css';
 type Props = {
   name: 'Авторизация' | 'Регистрация';
 };
+type Inputs = {
+  email: string;
+  password: string;
+};
 
 export const AuthForm = memo((props: Props) => {
-  //TODO: Временное решение для показа текста ошибки
-  const [isErrorVisible, setIsErrorVisible] = useState(false);
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsErrorVisible(!isErrorVisible);
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    reset
+  } = useForm<Inputs>({ mode: 'onChange' });
+
+  const onSubmit: SubmitHandler<Inputs> = () => {
+    reset();
+  };
 
   return (
-    <form className={s.form} onSubmit={handleSubmit} noValidate>
+    <form className={s.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <h2 className={s.title}>{props.name}</h2>
       <div className={s.inputContainer}>
         <label className={s.inputName} htmlFor="email">
           E-mail
         </label>
         <input
-          className={clsx(s.input, {
-            [s.errorInput]: isErrorVisible
+          {...register('email', {
+            required: 'Это поле обязательно к заполнению',
+            pattern: {
+              value: /.+@.+..+/,
+              message: 'Указан некорректный email'
+            }
           })}
           type="email"
           id="email"
           autoComplete="email"
+          className={clsx(s.input, {
+            [s.errorInput]: errors.email
+          })}
         />
         <span
           className={clsx(s.errorMessage, {
-            [s.errorMessageVisible]: !isErrorVisible
+            [s.errorMessageVisible]: errors.email
           })}
         >
-          dfvdd
+          {errors.email?.message}
         </span>
       </div>
       <div className={s.inputContainer}>
@@ -44,21 +60,40 @@ export const AuthForm = memo((props: Props) => {
           Password
         </label>
         <input
+          {...register('password', {
+            required: 'Это поле обязательно к заполнению',
+            pattern: {
+              value: /^(?!.*[А-Я а-я]).{8,50}/,
+              message: 'Указан некорректный пароль'
+            },
+            minLength: {
+              value: 8,
+              message: 'Минимальное количество символов - 8'
+            },
+            maxLength: {
+              value: 50,
+              message: 'Максимальное количество символов - 50'
+            }
+          })}
           className={clsx(s.input, {
-            [s.errorInput]: isErrorVisible
+            [s.errorInput]: errors.password
           })}
           type="password"
           id="password"
         />
         <span
           className={clsx(s.errorMessage, {
-            [s.errorMessageVisible]: !isErrorVisible
+            [s.errorMessageVisible]: errors.password
           })}
         >
-          dfvdd
+          {errors.password?.message}
         </span>
       </div>
-      <button type="submit" disabled={false} className={s.button}>
+      <button
+        type="submit"
+        disabled={!isValid}
+        className={clsx(s.button, { [s.buttonDisabled]: !isValid })}
+      >
         {props.name === 'Регистрация' ? 'Зарегистрироваться' : 'Войти'}
       </button>
 
