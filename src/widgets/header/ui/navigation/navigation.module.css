@@ -1,0 +1,33 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 60px;
+  margin: 0;
+  padding: 0;
+}
+.listItem {
+  list-style: none;
+}
+.link {
+  display: inline-block;
+  font-size: 20px;
+  line-height: normal;
+  text-decoration: none;
+  color: unset;
+  transition: transform 0.4s ease;
+}
+.link:hover {
+  transform: scale(1.1);
+}
+.linkActive {
+  border-bottom: 2px solid var(--light-theme-accent-color);
+}
+.logoutLink {
+  composes: link;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}

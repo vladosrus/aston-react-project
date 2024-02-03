@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from '../header/ui/header';
-import { Footer } from '../Footer/footer';
+import { Footer } from '../footer/footer';
 import s from './base-layout.module.css';
 
 const BaseLayout = memo(() => {
