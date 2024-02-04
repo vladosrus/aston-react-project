@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { State } from '../../../shared/lib/use-typed-selector';
 
 const initialState = {
   user: {
     email: null,
-    isAuth: false
+    id: null
   }
 };
 
@@ -14,15 +13,14 @@ const userSlice = createSlice({
   reducers: {
     userSignIn(state, action) {
       state.user.email = action.payload.email;
-      state.user.isAuth = true;
+      state.user.id = action.payload.id;
     },
     userSignOut(state) {
       state.user.email = null;
-      state.user.isAuth = false;
+      state.user.id = null;
     }
   }
 });
 
 export const { userSignIn, userSignOut } = userSlice.actions;
 export const userReducer = userSlice.reducer;
-export const isAuthField = (state: State) => state.user.user.isAuth;
