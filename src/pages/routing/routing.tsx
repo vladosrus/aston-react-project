@@ -16,6 +16,7 @@ const SearchPage = lazy(() => import('../search-page/search-page'));
 const HistoryPage = lazy(() => import('../history-page/history-page'));
 const FavoritesPage = lazy(() => import('../favorites-page/favorites-page'));
 const NotFoundPage = lazy(() => import('../not-found-page/not-found-page'));
+import { ProtectedRoute } from '../providers/protected-route';
 
 import type { User } from 'firebase/auth';
 
@@ -41,10 +42,22 @@ export function Routing() {
         <Route path={paths.searchPage} element={<SearchPage />} />
         <Route path={paths.registrationPage} element={<RegistrationPage />} />
         <Route path={paths.loginPage} element={<LoginPage />} />
-
-        {/* TODO: Позже роуты ниже будут защищены авторизацией */}
-        <Route path={paths.historyPage} element={<HistoryPage />} />
-        <Route path={paths.favoritesPage} element={<FavoritesPage />} />
+        <Route
+          path={paths.historyPage}
+          element={
+            <ProtectedRoute>
+              <HistoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={paths.favoritesPage}
+          element={
+            <ProtectedRoute>
+              <FavoritesPage />
+            </ProtectedRoute>
+          }
+        />
       </Route>
       <Route path={paths.notFoundPage} element={<NotFoundPage />} />
     </Routes>
