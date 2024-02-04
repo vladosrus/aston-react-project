@@ -1,10 +1,9 @@
-import { lazy, useEffect } from 'react';
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { paths } from '../../shared/model/paths';
-import { useTypedDispatch } from '../../shared/lib/use-typed-dispatch';
-import { userSignIn, userSignOut } from '../../entities/user';
-import { checkAuth, logout } from '../../shared/api/firebase-api';
+import { useAuth } from '../../shared/lib/use-auth';
 
+import { ProtectedRoute } from '../providers/protected-route';
 const HomePage = lazy(() => import('../home-page/home-page'));
 const BaseLayout = lazy(() => import('../../widgets/base-layout/base-layout'));
 const LoginPage = lazy(() => import('../login-page/login-page'));
@@ -16,25 +15,15 @@ const SearchPage = lazy(() => import('../search-page/search-page'));
 const HistoryPage = lazy(() => import('../history-page/history-page'));
 const FavoritesPage = lazy(() => import('../favorites-page/favorites-page'));
 const NotFoundPage = lazy(() => import('../not-found-page/not-found-page'));
-import { ProtectedRoute } from '../providers/protected-route';
 
-import type { User } from 'firebase/auth';
+import { Preloader } from '../../shared/ui/preloader/preloader';
 
 export function Routing() {
-  const dispatch = useTypedDispatch();
+  const { isAuthChecking } = useAuth();
 
-  useEffect(() => {
-    checkAuth((user: User | null) => {
-      if (user) {
-        dispatch(userSignIn(user.email));
-      } else {
-        logout();
-        dispatch(userSignOut());
-      }
-    });
-  });
-
-  return (
+  return isAuthChecking ? (
+    <Preloader />
+  ) : (
     <Routes>
       <Route path={paths.homePage} element={<BaseLayout />}>
         <Route index element={<HomePage />} />
