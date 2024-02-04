@@ -4,13 +4,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import clsx from 'clsx';
 
 import s from './auth-form.module.css';
+import type { Inputs } from '../../shared/api/firebase-api';
 
 type Props = {
   name: 'Авторизация' | 'Регистрация';
-};
-type Inputs = {
-  email: string;
-  password: string;
+  onSubmit: ({ email, password }: Inputs) => void;
 };
 
 export const AuthForm = memo((props: Props) => {
@@ -21,7 +19,8 @@ export const AuthForm = memo((props: Props) => {
     reset
   } = useForm<Inputs>({ mode: 'onChange' });
 
-  const onSubmit: SubmitHandler<Inputs> = () => {
+  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
+    props.onSubmit(data);
     reset();
   };
 
