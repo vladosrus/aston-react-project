@@ -27,11 +27,16 @@ jobs:
 
       - name: Устанавливаем зависимости
         run: npm ci
+
+      - name: Создаём build
+        run: npm run build
+
       # Проверки кодстайла
       - name: Проверка Prettier
         run: npm run lint:prettier
       - name: Проверка Eslint
         run: npm run lint:eslint
+
       # Тесты
 
   CD: # эта часть отвечает за развёртывание приложения
