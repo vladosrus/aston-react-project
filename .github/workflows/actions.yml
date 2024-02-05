@@ -60,7 +60,7 @@ jobs:
           git config --global user.name ${{ secrets.MY_NAME }}
           git remote set-url origin ${{ secrets.MY_ORIGIN_ADDRESS }}
           npm run deploy
-        env: 
+        env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
           VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
