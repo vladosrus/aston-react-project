@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { Section } from '../../shared/ui/section/section';
 import { PhotoList } from '../../widgets/photo-list/photo-list';
-import { PhotoInfo } from '../home-page/home-page';
+import { Photo } from '../../shared/api/unsplash-api';
 
-const favouritesList: PhotoInfo[] = [
+const favoritesList: Photo[] = [
   {
     id: 'Lz2taM_b0CQ',
     slug: 'a-white-flower-with-green-stems-on-a-white-surface-Lz2taM_b0CQ',
@@ -270,8 +270,8 @@ const FavoritesPage = memo(() => {
     <>
       <Section type="top" />
       <Section type="main">
-        {favouritesList.length ? (
-          <PhotoList list={favouritesList} />
+        {favoritesList.length ? (
+          <PhotoList list={favoritesList} />
         ) : (
           <h2>{'У Вашей ещё нет избранных фотографий :('}</h2>
         )}
