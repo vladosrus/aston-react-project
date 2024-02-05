@@ -1,0 +1,1 @@
+import{r as s,a as e,j as t}from"./index-iFFN4YMq.js";import{S as r}from"./section-dP7cVYI5.js";import{A as a}from"./auth-form-AfrfS2ry.js";import"./clsx-Zbgk8kpT.js";const x=s.memo(()=>{const{handleRegistration:o}=e();return t.jsxs(t.Fragment,{children:[t.jsx(r,{type:"top"}),t.jsx(r,{type:"main",children:t.jsx(a,{name:"Регистрация",onSubmit:o})})]})});export{x as default};
