@@ -1,1 +1,0 @@
-import{r as e,j as s,L as a,p as n}from"./index-6k8RFufo.js";const o="_link_5sz85_1",i="_img_5sz85_14",m="_text_5sz85_22",t={link:o,img:i,text:m},r=e.memo(()=>s.jsxs(a,{to:n.homePage,className:t.link,children:[s.jsx("div",{className:t.img}),s.jsx("h1",{className:t.text,children:"Фото by Unsplash"})]}));export{r as L};

@@ -1,0 +1,1 @@
+import{r as c,j as s}from"./index-QGUBp-NC.js";import{c as i}from"./clsx-Zbgk8kpT.js";const e="_topSection_1sycp_1",m="_mainSection_1sycp_9",t={topSection:e,mainSection:m},r=c.memo(({type:o,children:n})=>s.jsx("section",{className:i({[t.mainSection]:o==="main",[t.topSection]:o==="top"}),children:n}));export{r as S};
