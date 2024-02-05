@@ -6,6 +6,7 @@
 }
 .img {
   max-width: 70%;
+  max-height: 70vh;
   object-fit: cover;
   border-radius: 25px;
 }
@@ -28,6 +29,11 @@
   font-weight: 600;
 }
 .link {
+  display: inline-block;
   text-decoration: none;
   color: var(--light-theme-black-text-color);
+  transition: all 0.4s ease;
+}
+.link:hover {
+  transform: scale(1.1);
 }

@@ -1,18 +1,18 @@
-import { memo } from 'react';
+import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { PhotoInfo } from '../../pages/home-page/home-page';
+import { Photo } from '../../shared/api/unsplash-api';
 import { LikeButton } from '../../shared/ui/like-button/like-button';
 import s from './photo-list.module.css';
 
 type Props = {
-  list: PhotoInfo[];
+  list: Photo[] | undefined;
 };
 
-export const PhotoList = memo((props: Props) => {
+export const PhotoList: FC<Props> = memo(({ list }) => {
   return (
     <ul className={s.list}>
-      {props.list.map((photoInfo: PhotoInfo) => (
+      {list?.map((photoInfo: Photo) => (
         <li
           key={photoInfo.id}
           className={clsx(s.listItem, {
@@ -22,12 +22,12 @@ export const PhotoList = memo((props: Props) => {
           <figure className={s.figure}>
             <img
               className={s.img}
-              src={photoInfo.urls.raw}
+              src={photoInfo.url}
               alt={photoInfo.alt_description}
             />
             <figcaption className={s.figcaption}>
               <Link
-                to="/aston-react-project/photos/:id"
+                to={`/aston-react-project/photos/${photoInfo.id}`}
                 className={s.infoButton}
               >
                 Больше информации
