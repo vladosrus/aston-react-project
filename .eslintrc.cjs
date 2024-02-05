@@ -43,6 +43,7 @@ module.exports = {
       }
     ],
     'react/display-name': 'off',
+    'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/self-closing-comp': 'error',
     'react/jsx-uses-react': 'off',

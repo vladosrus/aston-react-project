@@ -1,32 +1,34 @@
-import { ReactNode, memo } from 'react';
-import { PhotoInfo } from '../../pages/details-page/details-page';
+import { FC, ReactNode, memo } from 'react';
+import { Link } from 'react-router-dom';
 import { LikeButton } from '../../shared/ui/like-button/like-button';
+import { FullPhotoInfo } from '../../shared/api/unsplash-api';
 
 import s from './photo-details.module.css';
 
-export const PhotoDetails = memo(({ photoInfo }: { photoInfo: PhotoInfo }) => {
-  const photoDescription: {
-    category: string;
-    description: string | ReactNode;
-  }[] = [
-    { category: 'Создатель:', description: photoInfo.user.name },
-    { category: 'Страна:', description: photoInfo.user.location },
+type Props = {
+  photoInfo: FullPhotoInfo | undefined;
+};
+
+export const PhotoDetails: FC<Props> = memo(({ photoInfo }) => {
+  const photoDescription: PhotoDescription[] = [
+    { category: 'Создатель:', description: photoInfo?.creator.name },
+    { category: 'Страна:', description: photoInfo?.creator.country },
     {
       category: 'Описание:',
       description:
-        photoInfo.description?.length > photoInfo.alt_description?.length
-          ? photoInfo.description
-          : photoInfo.alt_description
+        (photoInfo?.description || '') > (photoInfo?.alt_description || '')
+          ? photoInfo?.description
+          : photoInfo?.alt_description
     },
     {
       category: 'Профиль создателя в Unsplash:',
       description: (
-        <a
-          href={photoInfo.user.links.html}
+        <Link
+          to={photoInfo?.creator.profileLink || '#'}
+          className={s.link}
           target="_blank"
           rel="noopener noreferrer"
-          className={s.link}
-        >{`@${photoInfo.user.username}`}</a>
+        >{`@${photoInfo?.creator.profileName}`}</Link>
       )
     }
   ];
@@ -35,11 +37,11 @@ export const PhotoDetails = memo(({ photoInfo }: { photoInfo: PhotoInfo }) => {
     <article className={s.article}>
       <img
         className={s.img}
-        src={photoInfo.urls.raw}
+        src={photoInfo?.url}
         alt={
-          photoInfo.description
-            ? photoInfo.description
-            : photoInfo.alt_description
+          photoInfo?.description
+            ? photoInfo?.description
+            : photoInfo?.alt_description
         }
       />
       <ul className={s.descriptionList}>
@@ -58,3 +60,8 @@ export const PhotoDetails = memo(({ photoInfo }: { photoInfo: PhotoInfo }) => {
     </article>
   );
 });
+
+type PhotoDescription = {
+  category: string;
+  description: string | ReactNode;
+};
