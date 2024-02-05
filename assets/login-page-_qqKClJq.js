@@ -1,1 +1,0 @@
-import{r as s,u as e,j as t}from"./index-QGUBp-NC.js";import{S as o}from"./section-kCtfyyfY.js";import{A as m}from"./auth-form-rBau0vSR.js";import"./clsx-Zbgk8kpT.js";const u=s.memo(()=>{const{handleLogin:r}=e();return t.jsxs(t.Fragment,{children:[t.jsx(o,{type:"top"}),t.jsx(o,{type:"main",children:t.jsx(m,{name:"Авторизация",onSubmit:r})})]})});export{u as default};

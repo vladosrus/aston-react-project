@@ -1,0 +1,1 @@
+import{r as n,j as i}from"./index-ulds37X7.js";import{c as s}from"./clsx-Zbgk8kpT.js";const u="_likeButton_onjxr_1",c="_likeButtonActive_onjxr_19 _likeButton_onjxr_1",o={likeButton:u,likeButtonActive:c};function l(){const[t,e]=n.useState(!1);return i.jsx("button",{type:"button",className:s(o.likeButton,{[o.likeButtonActive]:t}),onClick:()=>e(!t)})}export{l as L};
