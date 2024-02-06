@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { paths } from '../../shared/model/paths';
-import { useAuth } from '../../shared/lib/use-auth';
+import { useAuth } from '../../features/auth/lib/use-auth';
 
 import { ProtectedRoute } from '../providers/protected-route';
 const HomePage = lazy(() => import('../home-page/home-page'));
@@ -16,13 +16,13 @@ const HistoryPage = lazy(() => import('../history-page/history-page'));
 const FavoritesPage = lazy(() => import('../favorites-page/favorites-page'));
 const NotFoundPage = lazy(() => import('../not-found-page/not-found-page'));
 
-import { Preloader } from '../../shared/ui/preloader/preloader';
+import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 
 export function Routing() {
   const { isAuthChecking } = useAuth();
 
   return isAuthChecking ? (
-    <Preloader />
+    <PagePreloader />
   ) : (
     <Routes>
       <Route path={paths.homePage} element={<BaseLayout />}>

@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   background-color: var(--light-theme-background-color);
-  background-image: url(../assets/preloader.svg);
+  background-image: url(../assets/page_preloader.svg);
   background-position: center;
   background-repeat: no-repeat;
 }

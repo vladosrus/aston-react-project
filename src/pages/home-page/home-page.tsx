@@ -3,7 +3,7 @@ import { SearchForm } from '../../widgets/search-form/search-form';
 import { Section } from '../../shared/ui/section/section';
 import { PhotoList } from '../../widgets/photo-list/photo-list';
 import { useGetInitialPhotosQuery } from '../../shared/api/unsplash-api';
-import { Preloader } from '../../shared/ui/preloader/preloader';
+import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 
 const HomePage = memo(() => {
   const { data: list, isLoading } = useGetInitialPhotosQuery();
@@ -14,7 +14,7 @@ const HomePage = memo(() => {
         <SearchForm />
       </Section>
       <Section type="main">
-        {isLoading ? <Preloader /> : <PhotoList list={list} />}
+        {isLoading ? <PagePreloader /> : <PhotoList list={list} />}
       </Section>
     </>
   );

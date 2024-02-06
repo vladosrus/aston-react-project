@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../../shared/lib/use-auth';
+import { useAuth } from '../../features/auth/lib/use-auth';
 import { paths } from '../../shared/model/paths';
 
 export function ProtectedRoute({ children }: { children: JSX.Element }) {

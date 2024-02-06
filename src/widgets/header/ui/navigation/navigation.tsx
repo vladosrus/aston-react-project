@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-import { useAuth } from '../../../../shared/lib/use-auth';
-import { Preloader } from '../../../../shared/ui/preloader/preloader';
+import { useAuth } from '../../../../features/auth/lib/use-auth';
+import { PagePreloader } from '../../../../shared/ui/page-preloader/page-preloader';
 import s from './navigation.module.css';
 import { navLinksForGuest, navLinksForUser } from './model/nav-links-lists';
 import type { NavLinkInfo } from './model/nav-links-lists';
@@ -29,7 +29,7 @@ export const Navigation = memo(() => {
   }
 
   return isAuthChecking ? (
-    <Preloader />
+    <PagePreloader />
   ) : (
     <ul className={s.list}>
       {isAuth
