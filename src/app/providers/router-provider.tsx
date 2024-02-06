@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Preloader } from '../../shared/ui/preloader/preloader';
+import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 
 type Prop = {
   children: JSX.Element;
@@ -9,7 +9,7 @@ type Prop = {
 export function RouterProvider({ children }: Prop) {
   return (
     <BrowserRouter>
-      <Suspense fallback={<Preloader />}>{children}</Suspense>
+      <Suspense fallback={<PagePreloader />}>{children}</Suspense>
     </BrowserRouter>
   );
 }

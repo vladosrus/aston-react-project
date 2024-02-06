@@ -1,1 +1,1 @@
-export { userReducer, userSignIn, userSignOut } from './model/slice';
+export { userReducer, userStateCleared } from './model/slice';

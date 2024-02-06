@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Section } from '../../shared/ui/section/section';
 import { PhotoDetails } from '../../widgets/photo-details/photo-details';
 import { useGetPhotoByIdQuery } from '../../shared/api/unsplash-api';
-import { Preloader } from '../../shared/ui/preloader/preloader';
+import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 
 export const DetailsPage = memo(() => {
   const { id } = useParams();
@@ -13,7 +13,7 @@ export const DetailsPage = memo(() => {
     <>
       <Section type="top" />
       <Section type="main">
-        {isLoading ? <Preloader /> : <PhotoDetails photoInfo={photoInfo} />}
+        {isLoading ? <PagePreloader /> : <PhotoDetails photoInfo={photoInfo} />}
       </Section>
     </>
   );

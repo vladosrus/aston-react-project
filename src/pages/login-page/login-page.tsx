@@ -1,12 +1,16 @@
 import { memo } from 'react';
+import { Navigate } from 'react-router-dom';
 import { Section } from '../../shared/ui/section/section';
-import { AuthForm } from '../../widgets/auth-form/auth-form';
-import { useAuth } from '../../shared/lib/use-auth';
+import { AuthForm } from '../../features/auth/ui/auth-form/auth-form';
+import { useAuth } from '../../features/auth/lib/use-auth';
+import { paths } from '../../shared/model/paths';
 
 const LoginPage = memo(() => {
-  const { handleLogin } = useAuth();
+  const { isAuth, handleLogin } = useAuth();
 
-  return (
+  return isAuth ? (
+    <Navigate to={paths.homePage} replace />
+  ) : (
     <>
       <Section type="top" />
       <Section type="main">

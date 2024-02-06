@@ -1,31 +1,39 @@
-import { memo } from 'react';
-import { Link } from 'react-router-dom';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import clsx from 'clsx';
+import { FC, memo } from 'react';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '../../lib/use-auth';
+import SmallPreloader from '../../../../shared/ui/assets/small_preloader.svg?react';
 
 import s from './auth-form.module.css';
-import type { Inputs } from '../../shared/api/firebase-api';
+import type { Inputs } from '../../../../shared/api/firebase-api';
 
 type Props = {
   name: 'Авторизация' | 'Регистрация';
-  onSubmit: ({ email, password }: Inputs) => void;
+  onSubmit: (data: Inputs) => void;
 };
 
-export const AuthForm = memo((props: Props) => {
+export const AuthForm: FC<Props> = memo((props) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     reset
   } = useForm<Inputs>({ mode: 'onChange' });
+  const {
+    isLoginLoading,
+    isRegistrationLoading,
+    loginError,
+    registrationError
+  } = useAuth();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
+  const onFormSubmit = (data: Inputs) => {
     props.onSubmit(data);
     reset();
   };
 
   return (
-    <form className={s.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form className={s.form} onSubmit={handleSubmit(onFormSubmit)} noValidate>
       <h2 className={s.title}>{props.name}</h2>
       <div className={s.inputContainer}>
         <label className={s.inputName} htmlFor="email">
@@ -48,7 +56,7 @@ export const AuthForm = memo((props: Props) => {
         />
         <span
           className={clsx(s.errorMessage, {
-            [s.errorMessageVisible]: errors.email
+            [s.messageVisible]: errors.email
           })}
         >
           {errors.email?.message}
@@ -82,18 +90,32 @@ export const AuthForm = memo((props: Props) => {
         />
         <span
           className={clsx(s.errorMessage, {
-            [s.errorMessageVisible]: errors.password
+            [s.messageVisible]: errors.password
           })}
         >
           {errors.password?.message}
         </span>
       </div>
+      <p
+        className={clsx(s.submitErrorMessage, {
+          [s.messageVisible]:
+            props.name === 'Регистрация' ? registrationError : loginError
+        })}
+      >
+        {props.name === 'Регистрация' ? registrationError : loginError}
+      </p>
       <button
         type="submit"
         disabled={!isValid}
         className={clsx(s.button, { [s.buttonDisabled]: !isValid })}
       >
-        {props.name === 'Регистрация' ? 'Зарегистрироваться' : 'Войти'}
+        {isLoginLoading || isRegistrationLoading ? (
+          <SmallPreloader height={40} />
+        ) : props.name === 'Регистрация' ? (
+          'Зарегистрироваться'
+        ) : (
+          'Войти'
+        )}
       </button>
 
       <div className={s.captionContainer}>
