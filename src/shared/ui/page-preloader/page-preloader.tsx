@@ -1,5 +1,14 @@
+import clsx from 'clsx';
+import { useTheme } from '../../../features/theme/lib/use-theme';
+
 import s from './page-preloader.module.css';
 
 export function PagePreloader() {
-  return <div className={s.preloader} />;
+  const { theme } = useTheme();
+
+  return (
+    <div
+      className={clsx(s.preloader, { [s.preloaderDark]: theme === 'dark' })}
+    />
+  );
 }

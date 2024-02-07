@@ -9,6 +9,8 @@
 :root {
   --base-width: 1280px;
 
+  --light-text-color: #808080;
+
   --light-theme-accent-color: #7466e1;
   --light-theme-background-color: #fff;
   --light-theme-black-text-color: #000;
@@ -17,6 +19,5 @@
   --dark-theme-accent-color: #00ffc2;
   --dark-theme-accent-background-color: #01221a;
   --dark-theme-background-color: #000;
-  --dark-theme-text-color: #e4e4e4;
   --dark-theme-title-color: #fff;
 }
