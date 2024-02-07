@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useTypedSelector } from '../../../shared/lib/use-typed-selector';
-import { favoritesSelector } from '../../../entities/user/model/slice';
+import { favoritesSelector } from '../../../entities/user';
 import { useTypedDispatch } from '../../../shared/lib/use-typed-dispatch';
 import { deletedFromFavorites } from '../model/deleted-from-favorites';
 import { addedToFavorites } from '../model/added-to-favorites';

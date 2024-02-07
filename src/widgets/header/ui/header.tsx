@@ -1,12 +1,13 @@
-import { memo, useState } from 'react';
 import clsx from 'clsx';
-import s from './header.module.css';
+import { memo } from 'react';
+import { useTheme } from '../../../features/theme/lib/use-theme';
 import { Logo } from './logo/logo';
 import { Navigation } from './navigation/navigation';
 
+import s from './header.module.css';
+
 export const Header = memo(() => {
-  // Временное решение для переключения темы
-  const [theme, setTheme] = useState('light');
+  const { theme, handleThemeButtonClick } = useTheme();
 
   return (
     <header className={s.header}>
@@ -19,7 +20,7 @@ export const Header = memo(() => {
             className={clsx(s.lightThemeButton, {
               [s.lightThemeButtonActive]: theme === 'light'
             })}
-            onClick={() => setTheme('light')}
+            onClick={() => handleThemeButtonClick('dark')}
             title="Изменить оформление страницы на светлое"
           />
           <button
@@ -27,7 +28,7 @@ export const Header = memo(() => {
             className={clsx(s.darkThemeButton, {
               [s.darkThemeButtonActive]: theme === 'dark'
             })}
-            onClick={() => setTheme('dark')}
+            onClick={() => handleThemeButtonClick('light')}
             title="Изменить оформление страницы на тёмное"
           />
         </div>
