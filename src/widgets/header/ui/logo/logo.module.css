@@ -19,8 +19,14 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+.imgDark {
+  background-image: url(../../../../shared/ui/assets/unsplash_icon_white.svg);
+}
 .text {
   margin: 0px;
   font-size: 20px;
   line-height: normal;
+}
+.textDark {
+  color: var(--dark-theme-text-color);
 }

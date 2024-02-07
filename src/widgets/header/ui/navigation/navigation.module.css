@@ -23,6 +23,13 @@
 .linkActive {
   border-bottom: 2px solid var(--light-theme-accent-color);
 }
+.linkActiveDark {
+  border-bottom: 2px solid var(--dark-theme-accent-color);
+}
+.linkDark {
+  composes: link;
+  color: var(--dark-theme-title-color);
+}
 .logoutLink {
   composes: link;
   margin: 0;
@@ -30,4 +37,7 @@
   border: none;
   background: none;
   cursor: pointer;
+}
+.logoutLinkDark {
+  color: var(--dark-theme-title-color);
 }

@@ -1,14 +1,17 @@
+import clsx from 'clsx';
 import { memo, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import clsx from 'clsx';
 import { useAuth } from '../../../../features/auth/lib/use-auth';
 import { PagePreloader } from '../../../../shared/ui/page-preloader/page-preloader';
 import { AuthContext } from '../../../../app/contexts/auth-context';
-import s from './navigation.module.css';
+import { useTheme } from '../../../../features/theme/lib/use-theme';
 import { navLinksForGuest, navLinksForUser } from './model/nav-links-lists';
+
+import s from './navigation.module.css';
 import type { NavLinkInfo } from './model/nav-links-lists';
 
 export const Navigation = memo(() => {
+  const { theme } = useTheme();
   const { isAuth, isAuthChecking } = useContext(AuthContext);
   const { handleLogout } = useAuth();
 
@@ -19,7 +22,13 @@ export const Navigation = memo(() => {
           <NavLink
             to={navLink.to}
             className={({ isActive }) =>
-              !isActive ? s.link : clsx(s.link, s.linkActive)
+              theme === 'dark'
+                ? !isActive
+                  ? s.linkDark
+                  : clsx(s.linkDark, s.linkActiveDark)
+                : !isActive
+                  ? s.link
+                  : clsx(s.link, s.linkActive)
             }
             title={navLink.title}
           >
@@ -40,7 +49,9 @@ export const Navigation = memo(() => {
       {isAuth && (
         <button
           type="button"
-          className={s.logoutLink}
+          className={clsx(s.logoutLink, {
+            [s.logoutLinkDark]: theme === 'dark'
+          })}
           onClick={() => handleLogout()}
         >
           Выход

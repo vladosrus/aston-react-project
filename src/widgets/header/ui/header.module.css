@@ -6,6 +6,9 @@
   z-index: 999;
   background-color: var(--light-theme-background-color);
 }
+.headerDark {
+  background-color: var(--dark-theme-background-color);
+}
 .container {
   max-width: var(--base-width);
   display: flex;
@@ -40,7 +43,7 @@
   composes: themeButton;
 }
 .lightThemeButtonActive {
-  background-image: url(../../../shared/ui/assets/light_theme_icon_active.svg);
+  background-image: url(../../../shared/ui/assets/ligth_theme_icon_active.svg);
   composes: themeButton;
 }
 .darkThemeButton {
