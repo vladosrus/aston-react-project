@@ -32,7 +32,7 @@ const SearchPage = memo(() => {
       </Section>
       <Section type="main">
         {list.length ? (
-          <PhotoList list={list} />
+          <PhotoList photoList={list} />
         ) : (
           <h2>{'По вашему запросу ничего не нашлось :('}</h2>
         )}

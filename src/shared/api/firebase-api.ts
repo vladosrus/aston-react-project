@@ -5,7 +5,14 @@ import {
   signOut,
   type User
 } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc
+} from 'firebase/firestore';
 import { auth, db } from '../../app/firebase';
 import type { RootUser } from '../../entities/user/model/slice';
 
@@ -44,4 +51,18 @@ export const getUserDbProfile = async (email: string) => {
   const docSnap = await getDoc(userRef);
 
   return docSnap;
+};
+
+export const addToFavorites = async (email: string, photoId: string) => {
+  const userRef = doc(db, 'users', email);
+  await updateDoc(userRef, {
+    favorites: arrayUnion(photoId)
+  });
+};
+
+export const deleteFromFavorites = async (email: string, photoId: string) => {
+  const userRef = doc(db, 'users', email);
+  await updateDoc(userRef, {
+    favorites: arrayRemove(photoId)
+  });
 };

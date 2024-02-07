@@ -1,7 +1,10 @@
-import { FC, ReactNode, memo } from 'react';
+import { FC, ReactNode, memo, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LikeButton } from '../../shared/ui/like-button/like-button';
 import { FullPhotoInfo } from '../../shared/api/unsplash-api';
+import { useFavorites } from '../../features/favorites/lib/use-favorites';
+import { AuthContext } from '../../app/contexts/auth-context';
+import SmallPreloader from '../../shared/ui/assets/small_preloader.svg?react';
 
 import s from './photo-details.module.css';
 
@@ -9,26 +12,32 @@ type Props = {
   photoInfo: FullPhotoInfo | undefined;
 };
 
-export const PhotoDetails: FC<Props> = memo(({ photoInfo }) => {
+export const PhotoDetails: FC<Props> = memo((props) => {
+  const { isFavorite, isLoading, handleFavoriteButtonClick } = useFavorites(
+    props.photoInfo?.id
+  );
+  const { isAuth } = useContext(AuthContext);
+
   const photoDescription: PhotoDescription[] = [
-    { category: 'Создатель:', description: photoInfo?.creator.name },
-    { category: 'Страна:', description: photoInfo?.creator.country },
+    { category: 'Создатель:', description: props.photoInfo?.creator.name },
+    { category: 'Страна:', description: props.photoInfo?.creator.country },
     {
       category: 'Описание:',
       description:
-        (photoInfo?.description || '') > (photoInfo?.alt_description || '')
-          ? photoInfo?.description
-          : photoInfo?.alt_description
+        (props.photoInfo?.description || '') >
+        (props.photoInfo?.alt_description || '')
+          ? props.photoInfo?.description
+          : props.photoInfo?.alt_description
     },
     {
       category: 'Профиль создателя в Unsplash:',
       description: (
         <Link
-          to={photoInfo?.creator.profileLink || '#'}
+          to={props.photoInfo?.creator.profileLink || '#'}
           className={s.link}
           target="_blank"
           rel="noopener noreferrer"
-        >{`@${photoInfo?.creator.profileName}`}</Link>
+        >{`@${props.photoInfo?.creator.profileName}`}</Link>
       )
     }
   ];
@@ -37,11 +46,11 @@ export const PhotoDetails: FC<Props> = memo(({ photoInfo }) => {
     <article className={s.article}>
       <img
         className={s.img}
-        src={photoInfo?.url}
+        src={props.photoInfo?.url}
         alt={
-          photoInfo?.description
-            ? photoInfo?.description
-            : photoInfo?.alt_description
+          props.photoInfo?.description
+            ? props.photoInfo?.description
+            : props.photoInfo?.alt_description
         }
       />
       <ul className={s.descriptionList}>
@@ -54,7 +63,15 @@ export const PhotoDetails: FC<Props> = memo(({ photoInfo }) => {
           );
         })}
         <li className={s.descriptionListItem}>
-          <LikeButton />
+          {isAuth &&
+            (isLoading ? (
+              <SmallPreloader width={40} />
+            ) : (
+              <LikeButton
+                isFavorite={isFavorite}
+                handleFavoriteButtonClick={handleFavoriteButtonClick}
+              />
+            ))}
         </li>
       </ul>
     </article>

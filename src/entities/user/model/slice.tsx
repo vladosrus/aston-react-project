@@ -1,6 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { userDbProfileCreated } from '../../../features/user/user-db-profile-created';
 import { userDbProfileSynchronized } from '../../../features/user/user-db-profile-synchronized';
+import { addedToFavorites } from '../../../features/favorites/model/added-to-favorites';
+import { deletedFromFavorites } from '../../../features/favorites/model/deleted-from-favorites';
+import { RootState } from '../../../shared/lib/use-typed-selector';
 
 const initialState: State = {
   user: {
@@ -15,6 +18,14 @@ const initialState: State = {
       error: null
     },
     userDbProfileSynchronized: {
+      isLoading: false,
+      error: null
+    },
+    addedToFavorites: {
+      isLoading: false,
+      error: null
+    },
+    deletedFromFavorites: {
       isLoading: false,
       error: null
     }
@@ -64,11 +75,48 @@ const userSlice = createSlice({
       state.asyncMethodsStatuses.userDbProfileSynchronized.error =
         action.payload;
     });
+    builder.addCase(addedToFavorites.pending, (state) => {
+      state.asyncMethodsStatuses.addedToFavorites.isLoading = true;
+      state.asyncMethodsStatuses.addedToFavorites.error = null;
+    });
+    builder.addCase(addedToFavorites.rejected, (state, action) => {
+      state.asyncMethodsStatuses.addedToFavorites.isLoading = false;
+      state.asyncMethodsStatuses.addedToFavorites.error = action.payload;
+    });
+    builder.addCase(addedToFavorites.fulfilled, (state) => {
+      state.asyncMethodsStatuses.addedToFavorites.isLoading = false;
+    });
+    builder.addCase(deletedFromFavorites.pending, (state) => {
+      state.asyncMethodsStatuses.deletedFromFavorites.isLoading = true;
+      state.asyncMethodsStatuses.deletedFromFavorites.error = null;
+    });
+    builder.addCase(deletedFromFavorites.rejected, (state, action) => {
+      state.asyncMethodsStatuses.deletedFromFavorites.isLoading = false;
+      state.asyncMethodsStatuses.deletedFromFavorites.error = action.payload;
+    });
+    builder.addCase(deletedFromFavorites.fulfilled, (state) => {
+      state.asyncMethodsStatuses.deletedFromFavorites.isLoading = false;
+    });
   }
 });
 
 export const { userStateCleared } = userSlice.actions;
 export const userReducer = userSlice.reducer;
+export const favoritesSelector = createSelector(
+  (state: RootState) => state.user.favorites,
+  (state: RootState) =>
+    state.user.asyncMethodsStatuses.deletedFromFavorites.isLoading,
+  (state: RootState) =>
+    state.user.asyncMethodsStatuses.addedToFavorites.isLoading,
+  (state: RootState) =>
+    state.user.asyncMethodsStatuses.userDbProfileSynchronized.isLoading,
+  (favorites, isDeletedLoading, isAddedLoading, isFavoritesLoading) => ({
+    favorites,
+    isDeletedLoading,
+    isAddedLoading,
+    isFavoritesLoading
+  })
+);
 
 export type DbData = {
   user: RootUser<string | null | undefined>;
@@ -86,6 +134,14 @@ type State = {
       error: string | null | undefined;
     };
     userDbProfileSynchronized: {
+      isLoading: boolean;
+      error: string | null | undefined;
+    };
+    addedToFavorites: {
+      isLoading: boolean;
+      error: string | null | undefined;
+    };
+    deletedFromFavorites: {
       isLoading: boolean;
       error: string | null | undefined;
     };

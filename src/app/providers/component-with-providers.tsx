@@ -1,3 +1,4 @@
+import { AuthProvider } from './auth-provider';
 import { RouterProvider } from './router-provider';
 import { StoreProvider } from './store-provider';
 
@@ -8,7 +9,9 @@ type Prop = {
 export function ComponentWithProviders({ children }: Prop) {
   return (
     <StoreProvider>
-      <RouterProvider>{children}</RouterProvider>
+      <RouterProvider>
+        <AuthProvider>{children}</AuthProvider>
+      </RouterProvider>
     </StoreProvider>
   );
 }
