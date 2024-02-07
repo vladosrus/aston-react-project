@@ -1,0 +1,1 @@
+import{d as s,e as g,l as d,f as c,g as u,h,i as l,k as L,p}from"./index-69SyOyib.js";const S=()=>{const{isLoading:t,error:a}=s(g),{isLoading:n,error:r}=s(d),i=c(),o=u();return{isLoginLoading:n,loginError:r,isRegistrationLoading:t,registrationError:a,handleLogin:e=>{o(l(e))},handleRegistration:e=>{o(h(e))},handleLogout:()=>{o(L()),i(p.homePage)}}};export{S as u};
