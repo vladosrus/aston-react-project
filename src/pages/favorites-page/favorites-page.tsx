@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { Section } from '../../shared/ui/section/section';
 import { PhotoList } from '../../widgets/photo-list/photo-list';
 import { useTypedSelector } from '../../shared/lib/use-typed-selector';
-import { favoritesSelector } from '../../entities/user/model/slice';
+import { favoritesSelector } from '../../entities/user';
 import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 
 const FavoritesPage = memo(() => {

@@ -1,1 +1,5 @@
-export { userReducer, userStateCleared } from './model/slice';
+export {
+  userReducer,
+  userStateCleared,
+  favoritesSelector
+} from './model/slice';
