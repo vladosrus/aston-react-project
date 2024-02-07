@@ -14,7 +14,7 @@ const HomePage = memo(() => {
         <SearchForm />
       </Section>
       <Section type="main">
-        {isLoading ? <PagePreloader /> : <PhotoList list={list} />}
+        {isLoading ? <PagePreloader /> : <PhotoList photoList={list} />}
       </Section>
     </>
   );

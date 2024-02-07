@@ -1,9 +1,10 @@
-import { lazy } from 'react';
+import { lazy, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { paths } from '../../shared/model/paths';
-import { useAuth } from '../../features/auth/lib/use-auth';
-
+import { AuthContext } from '../../app/contexts/auth-context';
 import { ProtectedRoute } from '../providers/protected-route';
+import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
+
 const HomePage = lazy(() => import('../home-page/home-page'));
 const BaseLayout = lazy(() => import('../../widgets/base-layout/base-layout'));
 const LoginPage = lazy(() => import('../login-page/login-page'));
@@ -16,10 +17,8 @@ const HistoryPage = lazy(() => import('../history-page/history-page'));
 const FavoritesPage = lazy(() => import('../favorites-page/favorites-page'));
 const NotFoundPage = lazy(() => import('../not-found-page/not-found-page'));
 
-import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
-
 export function Routing() {
-  const { isAuthChecking } = useAuth();
+  const { isAuthChecking } = useContext(AuthContext);
 
   return isAuthChecking ? (
     <PagePreloader />

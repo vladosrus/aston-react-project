@@ -1,42 +1,32 @@
 import { FC, memo } from 'react';
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { Photo } from '../../shared/api/unsplash-api';
-import { LikeButton } from '../../shared/ui/like-button/like-button';
+import { PhotoCard } from '../../shared/ui/photo/photo-card';
+import { FavoriteCard } from '../../features/favorites/ui/favorite-card/favorite-card';
 import s from './photo-list.module.css';
 
 type Props = {
-  list: Photo[] | undefined;
+  photoList?: Photo[] | undefined;
+  favoritesList?: string[];
 };
 
-export const PhotoList: FC<Props> = memo(({ list }) => {
+export const PhotoList: FC<Props> = memo((props) => {
   return (
     <ul className={s.list}>
-      {list?.map((photoInfo: Photo) => (
-        <li
-          key={photoInfo.id}
-          className={clsx(s.listItem, {
-            [s.listItemLarge]: photoInfo.width < photoInfo.height
-          })}
-        >
-          <figure className={s.figure}>
-            <img
-              className={s.img}
-              src={photoInfo.url}
-              alt={photoInfo.alt_description}
-            />
-            <figcaption className={s.figcaption}>
-              <Link
-                to={`/aston-react-project/photos/${photoInfo.id}`}
-                className={s.infoButton}
-              >
-                Больше информации
-              </Link>
-              <LikeButton />
-            </figcaption>
-          </figure>
-        </li>
-      ))}
+      {props.photoList
+        ? props.photoList.map((photoInfo) => (
+            <li
+              key={photoInfo.id}
+              className={clsx(s.listItem, {
+                [s.listItemLarge]: photoInfo.width < photoInfo.height
+              })}
+            >
+              <PhotoCard photoInfo={photoInfo} />
+            </li>
+          ))
+        : props.favoritesList?.map((photoInfo) => (
+            <FavoriteCard key={photoInfo} id={photoInfo} />
+          ))}
     </ul>
   );
 });

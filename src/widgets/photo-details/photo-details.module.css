@@ -17,6 +17,7 @@
 }
 .descriptionListItem {
   list-style: none;
+  display: inline-block;
 }
 .category {
   color: gray;

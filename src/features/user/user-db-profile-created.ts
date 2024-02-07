@@ -3,7 +3,7 @@ import { createTypedAsyncThunk } from '../../shared/lib/create-typed-asynk-thunk
 import { RootUser } from '../../entities/user/model/slice';
 
 export const userDbProfileCreated = createTypedAsyncThunk(
-  'auth/userDbProfileCreated',
+  'user/userDbProfileCreated',
   async (data: RootUser<string>, { rejectWithValue }) => {
     try {
       await api.createUserDbProfile(data);
