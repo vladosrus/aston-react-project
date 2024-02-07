@@ -22,13 +22,12 @@ export const Navigation = memo(() => {
           <NavLink
             to={navLink.to}
             className={({ isActive }) =>
-              theme === 'dark'
-                ? !isActive
-                  ? s.linkDark
-                  : clsx(s.linkDark, s.linkActiveDark)
-                : !isActive
-                  ? s.link
-                  : clsx(s.link, s.linkActive)
+              clsx(
+                s.link,
+                { [s.linkDark]: theme === 'dark' },
+                { [s.linkActive]: isActive && theme === 'light' },
+                { [s.linkActiveDark]: isActive && theme === 'dark' }
+              )
             }
             title={navLink.title}
           >

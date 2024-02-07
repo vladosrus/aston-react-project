@@ -28,5 +28,5 @@
   line-height: normal;
 }
 .textDark {
-  color: var(--dark-theme-text-color);
+  color: var(--dark-theme-title-color);
 }

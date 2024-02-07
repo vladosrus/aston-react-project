@@ -17,10 +17,9 @@
 }
 .descriptionListItem {
   list-style: none;
-  display: inline-block;
 }
 .category {
-  color: gray;
+  color: var(--light-text-color);
   font-size: 12px;
   margin-bottom: 3px;
 }
@@ -29,11 +28,17 @@
   font-size: 18px;
   font-weight: 600;
 }
+.descriptionDark {
+  color: var(--dark-theme-title-color);
+}
 .link {
   display: inline-block;
   text-decoration: none;
   color: var(--light-theme-black-text-color);
-  transition: all 0.4s ease;
+  transition: transform 0.4s ease;
+}
+.linkDark {
+  color: var(--dark-theme-title-color);
 }
 .link:hover {
   transform: scale(1.1);

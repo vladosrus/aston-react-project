@@ -9,3 +9,6 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+.preloaderDark {
+  background-color: var(--dark-theme-background-color);
+}

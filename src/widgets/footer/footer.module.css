@@ -4,6 +4,9 @@
   background-color: var(--light-theme-accent-color);
   z-index: 0;
 }
+.footerDark {
+  background-color: var(--dark-theme-accent-background-color);
+}
 .container {
   max-width: var(--base-width);
   margin: 0px auto;

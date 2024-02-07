@@ -5,6 +5,9 @@
   border-radius: 60px 60px 0px 0px;
   padding: 91px 0px 60px;
 }
+.topSectionDark {
+  background-color: var(--dark-theme-accent-background-color);
+}
 
 .mainSection {
   position: relative;
@@ -21,4 +24,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+.mainSectionDark {
+  background-color: var(--dark-theme-background-color);
 }

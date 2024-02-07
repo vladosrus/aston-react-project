@@ -1,0 +1,6 @@
+.text {
+  color: var(--light-theme-black-text-color);
+}
+.textDark {
+  color: var(--dark-theme-title-color);
+}

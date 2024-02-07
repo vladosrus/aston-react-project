@@ -3,6 +3,7 @@ import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../lib/use-auth';
+import { useTheme } from '../../../theme/lib/use-theme';
 import SmallPreloader from '../../../../shared/ui/assets/small_preloader.svg?react';
 
 import s from './auth-form.module.css';
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export const AuthForm: FC<Props> = memo((props) => {
+  const { theme } = useTheme();
   const {
     register,
     handleSubmit,
@@ -34,7 +36,9 @@ export const AuthForm: FC<Props> = memo((props) => {
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onFormSubmit)} noValidate>
-      <h2 className={s.title}>{props.name}</h2>
+      <h2 className={clsx(s.title, { [s.titleDark]: theme === 'dark' })}>
+        {props.name}
+      </h2>
       <div className={s.inputContainer}>
         <label className={s.inputName} htmlFor="email">
           E-mail
@@ -43,16 +47,20 @@ export const AuthForm: FC<Props> = memo((props) => {
           {...register('email', {
             required: 'Это поле обязательно к заполнению',
             pattern: {
-              value: /.+@.+..+/,
+              value: /.+@.+\..+/,
               message: 'Указан некорректный email'
             }
           })}
           type="email"
           id="email"
           autoComplete="email"
-          className={clsx(s.input, {
-            [s.errorInput]: errors.email
-          })}
+          className={clsx(
+            s.input,
+            { [s.inputDark]: theme === 'dark' },
+            {
+              [s.errorInput]: errors.email
+            }
+          )}
         />
         <span
           className={clsx(s.errorMessage, {
@@ -82,9 +90,13 @@ export const AuthForm: FC<Props> = memo((props) => {
               message: 'Максимальное количество символов - 50'
             }
           })}
-          className={clsx(s.input, {
-            [s.errorInput]: errors.password
-          })}
+          className={clsx(
+            s.input,
+            { [s.inputDark]: theme === 'dark' },
+            {
+              [s.errorInput]: errors.password
+            }
+          )}
           type="password"
           id="password"
         />
@@ -107,7 +119,11 @@ export const AuthForm: FC<Props> = memo((props) => {
       <button
         type="submit"
         disabled={!isValid}
-        className={clsx(s.button, { [s.buttonDisabled]: !isValid })}
+        className={clsx(
+          s.button,
+          { [s.buttonDark]: theme === 'dark' },
+          { [s.buttonDisabled]: !isValid }
+        )}
       >
         {isLoginLoading || isRegistrationLoading ? (
           <SmallPreloader height={40} />
@@ -119,7 +135,7 @@ export const AuthForm: FC<Props> = memo((props) => {
       </button>
 
       <div className={s.captionContainer}>
-        <p className={s.caption}>
+        <p className={clsx(s.caption, { [s.captionDark]: theme === 'dark' })}>
           {props.name === 'Регистрация'
             ? 'Уже зарегистрированы? '
             : 'Ещё не зарегистрированы? '}
@@ -130,7 +146,7 @@ export const AuthForm: FC<Props> = memo((props) => {
                 ? '/aston-react-project/signin'
                 : '/aston-react-project/signup'
             }
-            className={s.link}
+            className={clsx(s.link, { [s.linkDark]: theme === 'dark' })}
           >
             {props.name === 'Регистрация' ? 'Войти' : 'Регистрация'}
           </Link>

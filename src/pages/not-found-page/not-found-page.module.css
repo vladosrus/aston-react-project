@@ -1,9 +1,10 @@
 .section {
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px;
 }
-.img {
-  max-width: 800px;
+.sectionDark {
+  background-color: var(--dark-theme-background-color);
 }

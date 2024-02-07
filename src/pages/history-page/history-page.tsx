@@ -1,6 +1,10 @@
+import clsx from 'clsx';
 import { memo } from 'react';
 import { Section } from '../../shared/ui/section/section';
 import { HistoryList } from '../../widgets/history-list/history-list';
+import { useTheme } from '../../features/theme/lib/use-theme';
+
+import s from './history-page.module.css';
 
 const historyList: string[] = [
   'котики',
@@ -12,6 +16,8 @@ const historyList: string[] = [
 ];
 
 const HistoryPage = memo(() => {
+  const { theme } = useTheme();
+
   return (
     <>
       <Section type="top" />
@@ -19,7 +25,9 @@ const HistoryPage = memo(() => {
         {historyList.length ? (
           <HistoryList history={historyList} />
         ) : (
-          <h2>{'В Вашей истории поиска нет ни одного запроса :('}</h2>
+          <h2 className={clsx(s.text, { [s.textDark]: theme === 'dark' })}>
+            {'В Вашей истории поиска нет ни одного запроса :('}
+          </h2>
         )}
       </Section>
     </>

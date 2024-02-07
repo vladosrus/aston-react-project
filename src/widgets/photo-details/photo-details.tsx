@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { FC, ReactNode, memo, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LikeButton } from '../../shared/ui/like-button/like-button';
@@ -5,6 +6,7 @@ import { FullPhotoInfo } from '../../shared/api/unsplash-api';
 import { useFavorites } from '../../features/favorites/lib/use-favorites';
 import { AuthContext } from '../../app/contexts/auth-context';
 import SmallPreloader from '../../shared/ui/assets/small_preloader.svg?react';
+import { useTheme } from '../../features/theme/lib/use-theme';
 
 import s from './photo-details.module.css';
 
@@ -17,6 +19,7 @@ export const PhotoDetails: FC<Props> = memo((props) => {
     props.photoInfo?.id
   );
   const { isAuth } = useContext(AuthContext);
+  const { theme } = useTheme();
 
   const photoDescription: PhotoDescription[] = [
     { category: 'Создатель:', description: props.photoInfo?.creator.name },
@@ -34,7 +37,9 @@ export const PhotoDetails: FC<Props> = memo((props) => {
       description: (
         <Link
           to={props.photoInfo?.creator.profileLink || '#'}
-          className={s.link}
+          className={clsx(s.link, {
+            [s.linkDark]: theme === 'dark'
+          })}
           target="_blank"
           rel="noopener noreferrer"
         >{`@${props.photoInfo?.creator.profileName}`}</Link>
@@ -58,14 +63,20 @@ export const PhotoDetails: FC<Props> = memo((props) => {
           return (
             <li key={item.category} className={s.descriptionListItem}>
               <span className={s.category}>{item.category}</span>
-              <p className={s.description}>{item.description}</p>
+              <p
+                className={clsx(s.description, {
+                  [s.descriptionDark]: theme === 'dark'
+                })}
+              >
+                {item.description}
+              </p>
             </li>
           );
         })}
         <li className={s.descriptionListItem}>
           {isAuth &&
             (isLoading ? (
-              <SmallPreloader width={40} />
+              <SmallPreloader width={32} height={32} />
             ) : (
               <LikeButton
                 isFavorite={isFavorite}

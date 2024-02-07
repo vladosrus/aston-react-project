@@ -14,8 +14,11 @@
   font-size: 20px;
   line-height: normal;
   text-decoration: none;
-  color: unset;
+  color: var(--light-theme-black-text-color);
   transition: transform 0.4s ease;
+}
+.linkDark {
+  color: var(--dark-theme-title-color);
 }
 .link:hover {
   transform: scale(1.1);

@@ -3,6 +3,9 @@
   margin-bottom: 30px;
   padding-top: 20px;
 }
+.titleDark {
+  color: var(--dark-theme-title-color);
+}
 .list {
   margin: 0;
   margin-bottom: 40px;
@@ -19,6 +22,9 @@
   border-radius: 10px;
   border: 1px solid var(--light-theme-accent-color);
   transition: transform 0.4s ease;
+}
+.listItemDark {
+  border: 1px solid var(--dark-theme-accent-color);
 }
 .listItem:hover {
   transform: scale(0.97);
@@ -39,9 +45,12 @@
   overflow: hidden;
   color: var(--light-theme-black-text-color);
 }
+.textDark {
+  color: var(--dark-theme-title-color);
+}
 .icon {
-  min-width: 32px;
-  min-height: 32px;
+  max-width: 32px;
+  max-height: 32px;
 }
 .button {
   position: absolute;
@@ -56,7 +65,6 @@
 .button:hover {
   transform: scale(1.2);
 }
-
 .deleteButton {
   color: var(--light-theme-white-text-color);
   background-color: var(--light-theme-accent-color);
@@ -65,6 +73,10 @@
   border-radius: 10px;
   transition: transform 0.4s ease;
   cursor: pointer;
+}
+.deleteButtonDark {
+  color: #000;
+  background-color: var(--dark-theme-accent-color);
 }
 
 .deleteButton:hover {
