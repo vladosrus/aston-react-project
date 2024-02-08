@@ -1,9 +1,12 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../../shared/lib/use-typed-selector';
 import { userDbProfileCreated } from '../../../features/user/user-db-profile-created';
 import { userDbProfileSynchronized } from '../../../features/user/user-db-profile-synchronized';
 import { addedToFavorites } from '../../../features/favorites/model/added-to-favorites';
 import { deletedFromFavorites } from '../../../features/favorites/model/deleted-from-favorites';
-import { RootState } from '../../../shared/lib/use-typed-selector';
+import { addedToHistory } from '../../../features/history/model/added-to-history';
+import { deletedOneQueryFromHistory } from '../../../features/history/model/deleted-one-query-from-history';
+import { deletedAllQueriesFromHistory } from '../../../features/history/model/deleted-all-queries-from-history';
 
 const initialState: State = {
   user: {
@@ -28,6 +31,18 @@ const initialState: State = {
     deletedFromFavorites: {
       isLoading: false,
       error: null
+    },
+    addedToHistory: {
+      isLoading: false,
+      error: null
+    },
+    deletedOneQueryFromHistory: {
+      isLoading: false,
+      error: null
+    },
+    deletedAllQueriesFromHistory: {
+      isLoading: false,
+      error: null
     }
   }
 };
@@ -44,6 +59,7 @@ const userSlice = createSlice({
     }
   },
   extraReducers(builder) {
+    //Создание профиля пользователя в базе данных
     builder.addCase(userDbProfileCreated.pending, (state) => {
       state.asyncMethodsStatuses.userDbProfileCreated.isLoading = true;
       state.asyncMethodsStatuses.userDbProfileCreated.error = null;
@@ -58,6 +74,8 @@ const userSlice = createSlice({
       state.asyncMethodsStatuses.userDbProfileCreated.isLoading = false;
       state.asyncMethodsStatuses.userDbProfileCreated.error = action.payload;
     });
+
+    //Синхронизация данных пользователя
     builder.addCase(userDbProfileSynchronized.pending, (state) => {
       state.asyncMethodsStatuses.userDbProfileSynchronized.isLoading = true;
       state.asyncMethodsStatuses.userDbProfileSynchronized.error = null;
@@ -75,6 +93,8 @@ const userSlice = createSlice({
       state.asyncMethodsStatuses.userDbProfileSynchronized.error =
         action.payload;
     });
+
+    //Добавление в список избранных
     builder.addCase(addedToFavorites.pending, (state) => {
       state.asyncMethodsStatuses.addedToFavorites.isLoading = true;
       state.asyncMethodsStatuses.addedToFavorites.error = null;
@@ -86,6 +106,8 @@ const userSlice = createSlice({
     builder.addCase(addedToFavorites.fulfilled, (state) => {
       state.asyncMethodsStatuses.addedToFavorites.isLoading = false;
     });
+
+    //Удаление из списка избранных
     builder.addCase(deletedFromFavorites.pending, (state) => {
       state.asyncMethodsStatuses.deletedFromFavorites.isLoading = true;
       state.asyncMethodsStatuses.deletedFromFavorites.error = null;
@@ -96,6 +118,47 @@ const userSlice = createSlice({
     });
     builder.addCase(deletedFromFavorites.fulfilled, (state) => {
       state.asyncMethodsStatuses.deletedFromFavorites.isLoading = false;
+    });
+
+    //Добавление в историю запросов
+    builder.addCase(addedToHistory.pending, (state) => {
+      state.asyncMethodsStatuses.addedToHistory.isLoading = true;
+      state.asyncMethodsStatuses.addedToHistory.error = null;
+    });
+    builder.addCase(addedToHistory.rejected, (state, action) => {
+      state.asyncMethodsStatuses.addedToHistory.isLoading = false;
+      state.asyncMethodsStatuses.addedToHistory.error = action.payload;
+    });
+    builder.addCase(addedToHistory.fulfilled, (state) => {
+      state.asyncMethodsStatuses.addedToHistory.isLoading = false;
+    });
+
+    //Удаление одного запроса из истории запросов
+    builder.addCase(deletedOneQueryFromHistory.pending, (state) => {
+      state.asyncMethodsStatuses.deletedOneQueryFromHistory.isLoading = true;
+      state.asyncMethodsStatuses.deletedOneQueryFromHistory.error = null;
+    });
+    builder.addCase(deletedOneQueryFromHistory.rejected, (state, action) => {
+      state.asyncMethodsStatuses.deletedOneQueryFromHistory.isLoading = false;
+      state.asyncMethodsStatuses.deletedOneQueryFromHistory.error =
+        action.payload;
+    });
+    builder.addCase(deletedOneQueryFromHistory.fulfilled, (state) => {
+      state.asyncMethodsStatuses.deletedOneQueryFromHistory.isLoading = false;
+    });
+
+    //Удаление всех запросов из истории
+    builder.addCase(deletedAllQueriesFromHistory.pending, (state) => {
+      state.asyncMethodsStatuses.deletedAllQueriesFromHistory.isLoading = true;
+      state.asyncMethodsStatuses.deletedAllQueriesFromHistory.error = null;
+    });
+    builder.addCase(deletedAllQueriesFromHistory.rejected, (state, action) => {
+      state.asyncMethodsStatuses.deletedAllQueriesFromHistory.isLoading = false;
+      state.asyncMethodsStatuses.deletedAllQueriesFromHistory.error =
+        action.payload;
+    });
+    builder.addCase(deletedAllQueriesFromHistory.fulfilled, (state) => {
+      state.asyncMethodsStatuses.deletedAllQueriesFromHistory.isLoading = false;
     });
   }
 });
@@ -115,6 +178,15 @@ export const favoritesSelector = createSelector(
     isDeletedLoading,
     isAddedLoading,
     isFavoritesLoading
+  })
+);
+export const historySelector = createSelector(
+  (state: RootState) => state.user.history,
+  (state: RootState) =>
+    state.user.asyncMethodsStatuses.userDbProfileSynchronized.isLoading,
+  (history, isHistoryLoading) => ({
+    history,
+    isHistoryLoading
   })
 );
 
@@ -142,6 +214,18 @@ type State = {
       error: string | null | undefined;
     };
     deletedFromFavorites: {
+      isLoading: boolean;
+      error: string | null | undefined;
+    };
+    addedToHistory: {
+      isLoading: boolean;
+      error: string | null | undefined;
+    };
+    deletedOneQueryFromHistory: {
+      isLoading: boolean;
+      error: string | null | undefined;
+    };
+    deletedAllQueriesFromHistory: {
       isLoading: boolean;
       error: string | null | undefined;
     };

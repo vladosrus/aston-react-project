@@ -2,5 +2,6 @@ export * from './firebase-api';
 export {
   unsplashApi,
   useGetInitialPhotosQuery,
-  useGetPhotoByIdQuery
+  useGetPhotoByIdQuery,
+  useGetPhotoByQueryQuery
 } from './unsplash-api';
