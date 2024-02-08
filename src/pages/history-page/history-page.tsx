@@ -3,22 +3,18 @@ import { memo } from 'react';
 import { Section } from '../../shared/ui/section/section';
 import { HistoryList } from '../../widgets/history-list/history-list';
 import { useTheme } from '../../features/theme/lib/use-theme';
+import { useHistory } from '../../features/history/lib/use-history';
+import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 
 import s from './history-page.module.css';
 
-const historyList: string[] = [
-  'котики',
-  'бабушки',
-  'ggggdffsdfdsfsdfsdfsdfsdfsdfsfsdfsdf',
-  'gh',
-  'dfdf',
-  'sfsdfd'
-];
-
 const HistoryPage = memo(() => {
   const { theme } = useTheme();
+  const { history: historyList, isHistoryLoading } = useHistory();
 
-  return (
+  return isHistoryLoading ? (
+    <PagePreloader />
+  ) : (
     <>
       <Section type="top" />
       <Section type="main">

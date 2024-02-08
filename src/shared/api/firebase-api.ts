@@ -66,3 +66,26 @@ export const deleteFromFavorites = async (email: string, photoId: string) => {
     favorites: arrayRemove(photoId)
   });
 };
+
+export const addToHistory = async (email: string, query: string) => {
+  const userRef = doc(db, 'users', email);
+  await updateDoc(userRef, {
+    history: arrayUnion(query)
+  });
+};
+
+export const deleteOneQueryFromHistory = async (
+  email: string,
+  query: string
+) => {
+  const userRef = doc(db, 'users', email);
+  await updateDoc(userRef, {
+    history: arrayRemove(query)
+  });
+};
+export const deleteAllQueriesFromHistory = async (email: string) => {
+  const userRef = doc(db, 'users', email);
+  await updateDoc(userRef, {
+    history: []
+  });
+};

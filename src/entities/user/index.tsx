@@ -1,5 +1,6 @@
 export {
   userReducer,
   userStateCleared,
-  favoritesSelector
+  favoritesSelector,
+  historySelector
 } from './model/slice';

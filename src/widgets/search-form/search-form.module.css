@@ -15,10 +15,11 @@
   gap: 30px;
 }
 .inputContainer {
+  width: 1150px;
+  min-height: 85px;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width: 1150px;
 }
 .input {
   font-size: 16px;
@@ -49,4 +50,10 @@
 }
 .button:hover {
   transform: scale(1.07);
+}
+.button:disabled {
+  color: #808080;
+  cursor: default;
+  transform: scale(1);
+  background-color: rgb(255, 255, 255, 0.6);
 }
