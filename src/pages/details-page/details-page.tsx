@@ -7,13 +7,17 @@ import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 
 export const DetailsPage = memo(() => {
   const { id } = useParams();
-  const { data: photoInfo, isLoading } = useGetPhotoByIdQuery(id);
+  const { data: photoInfo, isLoading, error } = useGetPhotoByIdQuery(id);
 
   return (
     <>
       <Section type="top" />
       <Section type="main">
-        {isLoading ? <PagePreloader /> : <PhotoDetails photoInfo={photoInfo} />}
+        {isLoading ? (
+          <PagePreloader />
+        ) : (
+          <PhotoDetails photoInfo={photoInfo} error={error} />
+        )}
       </Section>
     </>
   );

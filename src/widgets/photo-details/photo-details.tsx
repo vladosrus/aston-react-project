@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { FC, ReactNode, memo, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { SerializedError } from '@reduxjs/toolkit';
 import { LikeButton } from '../../shared/ui/like-button/like-button';
 import { FullPhotoInfo } from '../../shared/api/unsplash-api';
 import { useFavorites } from '../../features/favorites/lib/use-favorites';
@@ -9,12 +10,28 @@ import SmallPreloader from '../../shared/ui/assets/small_preloader.svg?react';
 import { useTheme } from '../../features/theme/lib/use-theme';
 
 import s from './photo-details.module.css';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 type Props = {
   photoInfo: FullPhotoInfo | undefined;
+  error: FetchBaseQueryError | SerializedError | undefined;
 };
 
 export const PhotoDetails: FC<Props> = memo((props) => {
+  //Необходимо для вывода информации об произошедшей ошибке
+  if (props.error) {
+    if ('status' in props.error) {
+      const errMsg =
+        'error' in props.error
+          ? props.error.error
+          : JSON.stringify(props.error.data);
+      throw new Error(errMsg);
+    } else {
+      const errMsg = props.error.message;
+      throw new Error(errMsg);
+    }
+  }
+
   const { isFavorite, isLoading, handleFavoriteButtonClick } = useFavorites(
     props.photoInfo?.id
   );

@@ -1,15 +1,21 @@
 import { memo } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 import { SearchForm } from '../../features/search/search-form/search-form';
 import { Section } from '../../shared/ui/section/section';
 import { PhotoList } from '../../widgets/photo-list/photo-list';
 import { useGetPhotosByQueryQuery } from '../../shared/api';
 import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
+import { Fallback } from '../../shared/ui/fallback/fallback';
 
 const SearchPage = memo(() => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
-  const { data: list, isLoading } = useGetPhotosByQueryQuery(query || '', {
+  const {
+    data: list,
+    isLoading,
+    error
+  } = useGetPhotosByQueryQuery(query || '', {
     skip: query ? query.length <= 2 : true // если не передали запрос или запрос маленький, то не идём за данными
   });
 
@@ -19,13 +25,17 @@ const SearchPage = memo(() => {
         <SearchForm prevQuery={query || ''} />
       </Section>
       <Section type="main">
-        {isLoading ? (
-          <PagePreloader />
-        ) : list?.length ? (
-          <PhotoList photoList={list} />
-        ) : (
-          <h2>{'По вашему запросу ничего не нашлось :('}</h2>
-        )}
+        <ErrorBoundary FallbackComponent={Fallback}>
+          {isLoading ? (
+            <PagePreloader />
+          ) : list?.length ? (
+            <PhotoList photoList={list} error={error} />
+          ) : (
+            <h2>{'По вашему запросу ничего не нашлось :('}</h2>
+          )}
+          {/* Если будет ошибка запроса данных, то отработает ErrorBoundary */}
+          {!list && <PhotoList photoList={list} error={error} />}
+        </ErrorBoundary>
       </Section>
     </>
   );
