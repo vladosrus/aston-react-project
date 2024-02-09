@@ -50,14 +50,14 @@ export const unsplashApi = createApi({
         };
       }
     }),
-    getPhotoByQuery: build.query<Photo[], string | undefined>({
+    getPhotosByQuery: build.query<Photo[], string | undefined>({
       query: (query) => ({
         url: `/search/photos`,
         params: {
           query: query
         }
       }),
-      transformResponse: (res: SearchUnsplashData) => {
+      transformResponse: (res: SearchUnsplashData): Photo[] => {
         return res.results.map((photo) => {
           return {
             id: photo.id,
@@ -65,7 +65,7 @@ export const unsplashApi = createApi({
             height: photo.height,
             description: photo.description || '',
             alt_description: photo.alt_description || '',
-            url: photo.urls.regular
+            url: photo.urls.small
           };
         });
       }
@@ -76,7 +76,7 @@ export const unsplashApi = createApi({
 export const {
   useGetInitialPhotosQuery,
   useGetPhotoByIdQuery,
-  useGetPhotoByQueryQuery
+  useGetPhotosByQueryQuery
 } = unsplashApi;
 
 export interface RawUnsplashData {

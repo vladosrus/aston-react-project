@@ -3,13 +3,13 @@ import { useSearchParams } from 'react-router-dom';
 import { SearchForm } from '../../features/search/search-form/search-form';
 import { Section } from '../../shared/ui/section/section';
 import { PhotoList } from '../../widgets/photo-list/photo-list';
-import { useGetPhotoByQueryQuery } from '../../shared/api';
+import { useGetPhotosByQueryQuery } from '../../shared/api';
 import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 
 const SearchPage = memo(() => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
-  const { data: list, isLoading } = useGetPhotoByQueryQuery(query || '', {
+  const { data: list, isLoading } = useGetPhotosByQueryQuery(query || '', {
     skip: query ? query.length <= 2 : true // если не передали запрос или запрос маленький, то не идём за данными
   });
 

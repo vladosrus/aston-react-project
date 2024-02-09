@@ -3,5 +3,5 @@ export {
   unsplashApi,
   useGetInitialPhotosQuery,
   useGetPhotoByIdQuery,
-  useGetPhotoByQueryQuery
+  useGetPhotosByQueryQuery
 } from './unsplash-api';
