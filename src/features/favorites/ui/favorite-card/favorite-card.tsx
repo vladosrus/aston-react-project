@@ -10,7 +10,19 @@ type Props = {
 };
 
 export const FavoriteCard: FC<Props> = memo((props) => {
-  const { data: photoInfo, isLoading } = useGetPhotoByIdQuery(props.id);
+  const { data: photoInfo, isLoading, error } = useGetPhotoByIdQuery(props.id);
+
+  //Необходимо для вывода информации об произошедшей ошибке
+  if (error) {
+    if ('status' in error) {
+      const errMsg =
+        'error' in error ? error.error : JSON.stringify(error.data);
+      throw new Error(errMsg);
+    } else {
+      const errMsg = error.message;
+      throw new Error(errMsg);
+    }
+  }
 
   return isLoading ? (
     <PagePreloader />

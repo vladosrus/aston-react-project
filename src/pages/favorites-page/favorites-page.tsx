@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 import { memo } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { Fallback } from '../../shared/ui/fallback/fallback';
 import { Section } from '../../shared/ui/section/section';
 import { PhotoList } from '../../widgets/photo-list/photo-list';
 import { useTypedSelector } from '../../shared/lib/use-typed-selector';
@@ -18,13 +20,15 @@ const FavoritesPage = memo(() => {
     <>
       <Section type="top" />
       <Section type="main">
-        {favorites.length ? (
-          <PhotoList favoritesList={favorites} />
-        ) : (
-          <h2 className={clsx(s.text, { [s.textDark]: theme === 'dark' })}>
-            {'У Ваc ещё нет избранных фотографий :('}
-          </h2>
-        )}
+        <ErrorBoundary FallbackComponent={Fallback}>
+          {favorites.length ? (
+            <PhotoList favoritesList={favorites} />
+          ) : (
+            <h2 className={clsx(s.text, { [s.textDark]: theme === 'dark' })}>
+              {'У Ваc ещё нет избранных фотографий :('}
+            </h2>
+          )}
+        </ErrorBoundary>
       </Section>
     </>
   );
