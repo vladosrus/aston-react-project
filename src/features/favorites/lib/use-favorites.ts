@@ -9,8 +9,8 @@ export const useFavorites = (id: string | undefined) => {
   const dispatch = useTypedDispatch();
   const { favorites, isDeletedLoading, isAddedLoading } =
     useTypedSelector(favoritesSelector);
-  let isFavorite: boolean = false;
 
+  let isFavorite: boolean = false;
   if (id) {
     isFavorite = favorites.includes(id);
   }
@@ -25,6 +25,7 @@ export const useFavorites = (id: string | undefined) => {
       }
     }
   }, [isFavorite, dispatch, id]);
+
   return {
     isFavorite,
     isLoading,

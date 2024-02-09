@@ -1,17 +1,18 @@
+import { FC } from 'react';
 import { AuthProvider } from './auth-provider';
 import { RouterProvider } from './router-provider';
 import { StoreProvider } from './store-provider';
 
-type Prop = {
+type Props = {
   children: JSX.Element;
 };
 
-export function ComponentWithProviders({ children }: Prop) {
+export const ComponentWithProviders: FC<Props> = (props) => {
   return (
     <StoreProvider>
       <RouterProvider>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>{props.children}</AuthProvider>
       </RouterProvider>
     </StoreProvider>
   );
-}
+};

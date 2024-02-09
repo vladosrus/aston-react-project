@@ -2,9 +2,9 @@ import { lazy, useContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { paths } from '../../shared/model/paths';
 import { AuthContext } from '../../app/contexts/auth-context';
-import { ProtectedRoute } from '../providers/protected-route';
 import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 import { useTheme } from '../../features/theme/lib/use-theme';
+import { ProtectedRoute } from '../providers/protected-route';
 
 const HomePage = lazy(() => import('../home-page/home-page'));
 const BaseLayout = lazy(() => import('../../widgets/base-layout/base-layout'));

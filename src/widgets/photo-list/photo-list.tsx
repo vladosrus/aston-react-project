@@ -1,11 +1,12 @@
 import clsx from 'clsx';
 import { FC, memo } from 'react';
 import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { Photo } from '../../shared/api/unsplash-api';
 import { PhotoCard } from '../../shared/ui/photo/photo-card';
 import { FavoriteCard } from '../../features/favorites/ui/favorite-card/favorite-card';
+
 import s from './photo-list.module.css';
+import type { Photo } from '../../shared/api/unsplash-api';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 type Props = {
   photoList?: Photo[] | undefined;

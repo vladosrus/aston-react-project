@@ -1,6 +1,6 @@
 import * as api from '../../shared/api';
 import { createTypedAsyncThunk } from '../../shared/lib/create-typed-asynk-thunk';
-import { RootUser } from '../../entities/user/model/slice';
+import type { RootUser } from '../../entities/user/model/slice';
 
 export const userDbProfileCreated = createTypedAsyncThunk(
   'user/userDbProfileCreated',

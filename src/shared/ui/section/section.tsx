@@ -1,9 +1,13 @@
-import { FC, memo } from 'react';
 import clsx from 'clsx';
+import { FC, memo } from 'react';
 import { useTheme } from '../../../features/theme/lib/use-theme';
+
 import s from './section.module.css';
 
-type Props = { type: 'main' | 'top'; children?: JSX.Element };
+type Props = {
+  type: 'main' | 'top';
+  children?: JSX.Element;
+};
 
 export const Section: FC<Props> = memo((props) => {
   const { theme } = useTheme();

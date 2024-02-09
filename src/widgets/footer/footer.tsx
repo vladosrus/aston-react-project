@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useTheme } from '../../features/theme/lib/use-theme';
+
 import s from './footer.module.css';
 
 export const Footer = () => {

@@ -1,10 +1,10 @@
 import { Routing } from '../pages';
 import { ComponentWithProviders } from './providers';
 
-export function App() {
+export const App = () => {
   return (
     <ComponentWithProviders>
       <Routing />
     </ComponentWithProviders>
   );
-}
+};

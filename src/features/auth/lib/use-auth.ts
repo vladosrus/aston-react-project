@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { paths } from '../../../shared/model/paths';
 import { useTypedDispatch } from '../../../shared/lib/use-typed-dispatch';
@@ -20,17 +21,23 @@ export const useAuth = () => {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
 
-  const handleRegistration = (date: Inputs) => {
-    dispatch(userRegistered(date));
-  };
-  const handleLogin = (data: Inputs) => {
-    dispatch(userLoggedIn(data));
-  };
+  const handleRegistration = useCallback(
+    (date: Inputs) => {
+      dispatch(userRegistered(date));
+    },
+    [dispatch]
+  );
+  const handleLogin = useCallback(
+    (data: Inputs) => {
+      dispatch(userLoggedIn(data));
+    },
+    [dispatch]
+  );
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     dispatch(userLoggedOut());
     navigate(paths.homePage);
-  };
+  }, [dispatch, navigate]);
 
   return {
     isLoginLoading,
