@@ -1,9 +1,10 @@
-import { lazy, useContext } from 'react';
+import { lazy, useContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { paths } from '../../shared/model/paths';
 import { AuthContext } from '../../app/contexts/auth-context';
 import { ProtectedRoute } from '../providers/protected-route';
 import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
+import { useTheme } from '../../features/theme/lib/use-theme';
 
 const HomePage = lazy(() => import('../home-page/home-page'));
 const BaseLayout = lazy(() => import('../../widgets/base-layout/base-layout'));
@@ -19,8 +20,13 @@ const NotFoundPage = lazy(() => import('../not-found-page/not-found-page'));
 
 export function Routing() {
   const { isAuthChecking } = useContext(AuthContext);
+  const { isThemeLoading, handleLoadTheme } = useTheme();
 
-  return isAuthChecking ? (
+  useEffect(() => {
+    handleLoadTheme();
+  }, [handleLoadTheme]);
+
+  return isAuthChecking && isThemeLoading ? (
     <PagePreloader />
   ) : (
     <Routes>
