@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { SearchForm } from '../../widgets/search-form/search-form';
+import { SearchForm } from '../../features/search/search-form/search-form';
 import { Section } from '../../shared/ui/section/section';
 import { PhotoList } from '../../widgets/photo-list/photo-list';
 import { useGetPhotoByQueryQuery } from '../../shared/api';

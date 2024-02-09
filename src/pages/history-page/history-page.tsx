@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { memo } from 'react';
 import { Section } from '../../shared/ui/section/section';
-import { HistoryList } from '../../widgets/history-list/history-list';
+import { HistoryList } from '../../features/history/ui/history-list/history-list';
 import { useTheme } from '../../features/theme/lib/use-theme';
 import { useHistory } from '../../features/history/lib/use-history';
 import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';

@@ -2,15 +2,16 @@ import clsx from 'clsx';
 import { FC, memo, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { paths } from '../../shared/model/paths';
-import { useTypedDispatch } from '../../shared/lib/use-typed-dispatch';
-import { addedToHistory } from '../../features/history/model/added-to-history';
-import { AuthContext } from '../../app/contexts/auth-context';
+import { paths } from '../../../shared/model/paths';
+import { useTypedDispatch } from '../../../shared/lib/use-typed-dispatch';
+import { addedToHistory } from '../../history/model/added-to-history';
+import { AuthContext } from '../../../app/contexts/auth-context';
+import { SuggestionsList } from '../suggestions-list/suggestions-list';
 
 import s from './search-form.module.css';
 
 type Props = {
-  prevQuery: string;
+  prevQuery?: string;
 };
 
 export const SearchForm: FC<Props> = memo((props) => {
@@ -58,6 +59,7 @@ export const SearchForm: FC<Props> = memo((props) => {
         >
           {errors.query?.message}
         </span>
+        <SuggestionsList />
       </label>
 
       <button type="submit" className={s.button} disabled={!isValid}>
