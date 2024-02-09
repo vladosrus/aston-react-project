@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { RawUnsplashData } from '../../../shared/api/unsplash-api';
 import { paths } from '../../../shared/model/paths';
 
 import s from './suggestion.module.css';
+import type { Photo } from '../../../shared/api/unsplash-api';
 
 type Props = {
-  suggestion: RawUnsplashData;
+  suggestion: Photo;
 };
 
 export const Suggestion: FC<Props> = memo((props) => {
@@ -23,7 +23,7 @@ export const Suggestion: FC<Props> = memo((props) => {
       >
         <img
           className={s.img}
-          src={props.suggestion.urls.small}
+          src={props.suggestion.url}
           alt={
             props.suggestion?.description
               ? props.suggestion?.description
