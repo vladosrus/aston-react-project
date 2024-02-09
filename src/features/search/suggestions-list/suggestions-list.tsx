@@ -1,11 +1,9 @@
 import { FC, memo } from 'react';
 import { Suggestion } from '../suggestion/suggestion';
-import {
-  Photo,
-  useGetPhotosByQueryQuery
-} from '../../../shared/api/unsplash-api';
+import { useGetPhotosByQueryQuery } from '../../../shared/api/unsplash-api';
 
 import s from './suggestions-list.module.css';
+import type { Photo } from '../../../shared/api/unsplash-api';
 
 type Props = {
   query: string;

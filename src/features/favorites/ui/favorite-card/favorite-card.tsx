@@ -1,9 +1,10 @@
-import { FC, memo } from 'react';
 import clsx from 'clsx';
+import { FC, memo } from 'react';
 import { useGetPhotoByIdQuery } from '../../../../shared/api';
 import { PagePreloader } from '../../../../shared/ui/page-preloader/page-preloader';
-import s from '../../../../widgets/photo-list/photo-list.module.css';
 import { PhotoCard } from '../../../../shared/ui/photo/photo-card';
+
+import s from '../../../../widgets/photo-list/photo-list.module.css';
 
 type Props = {
   id: string;

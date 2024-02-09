@@ -2,6 +2,11 @@ import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../../shared/lib/use-typed-selector';
 import { themeLoaded } from '../../../features/theme/model/theme-loaded';
 
+type State = {
+  theme: 'light' | 'dark';
+  isLoading: boolean;
+};
+
 const initialState: State = {
   theme: 'light',
   isLoading: false
@@ -39,8 +44,3 @@ export const themeSelector = createSelector(
     isLoading
   })
 );
-
-type State = {
-  theme: 'light' | 'dark';
-  isLoading: boolean;
-};

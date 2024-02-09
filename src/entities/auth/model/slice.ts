@@ -4,6 +4,12 @@ import { RootState } from '../../../shared/lib/use-typed-selector';
 import { userLoggedOut } from '../../../features/auth/logout/user-logged-out';
 import { userLoggedIn } from '../../../features/auth/login/user-logged-in';
 
+type State = {
+  userRegistered: { isLoading: boolean; error: string | null | undefined };
+  userLoggedIn: { isLoading: boolean; error: string | null | undefined };
+  userLoggedOut: { isLoading: boolean; error: string | null | undefined };
+};
+
 const initialState: State = {
   userRegistered: { isLoading: false, error: null },
   userLoggedIn: { isLoading: false, error: null },
@@ -71,9 +77,3 @@ export const registrationInfoSelector = createSelector(
     error
   })
 );
-
-type State = {
-  userRegistered: { isLoading: boolean; error: string | null | undefined };
-  userLoggedIn: { isLoading: boolean; error: string | null | undefined };
-  userLoggedOut: { isLoading: boolean; error: string | null | undefined };
-};

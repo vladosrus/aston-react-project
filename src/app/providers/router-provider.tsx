@@ -1,15 +1,15 @@
-import { Suspense } from 'react';
+import { FC, Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 
-type Prop = {
+type Props = {
   children: JSX.Element;
 };
 
-export function RouterProvider({ children }: Prop) {
+export const RouterProvider: FC<Props> = (props) => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<PagePreloader />}>{children}</Suspense>
+      <Suspense fallback={<PagePreloader />}>{props.children}</Suspense>
     </BrowserRouter>
   );
-}
+};

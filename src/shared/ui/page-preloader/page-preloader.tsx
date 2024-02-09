@@ -3,7 +3,7 @@ import { useTheme } from '../../../features/theme/lib/use-theme';
 
 import s from './page-preloader.module.css';
 
-export function PagePreloader() {
+export const PagePreloader = () => {
   const { theme } = useTheme();
 
   return (
@@ -11,4 +11,4 @@ export function PagePreloader() {
       className={clsx(s.preloader, { [s.preloaderDark]: theme === 'dark' })}
     />
   );
-}
+};

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from './use-typed-selector';
-import { Dispatch } from './use-typed-dispatch';
+import type { RootState } from './use-typed-selector';
+import type { Dispatch } from './use-typed-dispatch';
 
 export type ThunkApiConfig = {
   state: RootState;

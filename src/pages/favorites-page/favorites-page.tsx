@@ -8,6 +8,7 @@ import { useTypedSelector } from '../../shared/lib/use-typed-selector';
 import { favoritesSelector } from '../../entities/user';
 import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 import { useTheme } from '../../features/theme/lib/use-theme';
+
 import s from './favorites-page.module.css';
 
 const FavoritesPage = memo(() => {

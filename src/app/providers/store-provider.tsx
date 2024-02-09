@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../store';
 
-type Prop = {
+type Props = {
   children: JSX.Element;
 };
 
-export function StoreProvider({ children }: Prop) {
-  return <Provider store={store}>{children}</Provider>;
-}
+export const StoreProvider: FC<Props> = (props) => {
+  return <Provider store={store}>{props.children}</Provider>;
+};
