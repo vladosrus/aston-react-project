@@ -79,7 +79,7 @@ export const {
   useGetPhotoByQueryQuery
 } = unsplashApi;
 
-interface RawUnsplashData {
+export interface RawUnsplashData {
   id: string;
   slug: string;
   created_at: string;

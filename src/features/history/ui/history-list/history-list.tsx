@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { paths } from '../../shared/model/paths';
-import { useTheme } from '../../features/theme/lib/use-theme';
-import { useTypedDispatch } from '../../shared/lib/use-typed-dispatch';
-import { deletedOneQueryFromHistory } from '../../features/history/model/deleted-one-query-from-history';
-import { deletedAllQueriesFromHistory } from '../../features/history/model/deleted-all-queries-from-history';
-import SearchIcon from '../../shared/ui/assets/search_icon.svg?react';
-import SearchIconDark from '../../shared/ui/assets/search_icon_dark.svg?react';
-import DeleteIcon from '../../shared/ui/assets/delete_icon.svg?react';
+import { paths } from '../../../../shared/model/paths';
+import { useTheme } from '../../../theme/lib/use-theme';
+import { useTypedDispatch } from '../../../../shared/lib/use-typed-dispatch';
+import { deletedOneQueryFromHistory } from '../../model/deleted-one-query-from-history';
+import { deletedAllQueriesFromHistory } from '../../model/deleted-all-queries-from-history';
+import SearchIcon from '../../../../shared/ui/assets/search_icon.svg?react';
+import SearchIconDark from '../../../../shared/ui/assets/search_icon_dark.svg?react';
+import DeleteIcon from '../../../../shared/ui/assets/delete_icon.svg?react';
 
 import s from './history-list.module.css';
 

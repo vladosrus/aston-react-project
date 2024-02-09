@@ -5,6 +5,8 @@ import { LikeButton } from '../like-button/like-button';
 import SmallPreloader from '../assets/small_preloader.svg?react';
 import { useFavorites } from '../../../features/favorites/lib/use-favorites';
 import { AuthContext } from '../../../app/contexts/auth-context';
+import { paths } from '../../model/paths';
+
 import s from './photo-card.module.css';
 
 type Props = {
@@ -27,7 +29,7 @@ export const PhotoCard: FC<Props> = memo((props) => {
       />
       <figcaption className={s.figcaption}>
         <Link
-          to={`/aston-react-project/photos/${props.photoInfo.id}`}
+          to={`${paths.homePage}photos/${props.photoInfo.id}`}
           className={s.infoButton}
         >
           Больше информации
