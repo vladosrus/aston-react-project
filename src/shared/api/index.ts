@@ -1,4 +1,4 @@
-export * from './firebase-api';
+export * from './api';
 export {
   unsplashApi,
   useGetInitialPhotosQuery,
