@@ -6,7 +6,7 @@ export const userDbProfileSynchronized = createTypedAsyncThunk(
   'user/userDbProfileSynchronized',
   async (email: string, { rejectWithValue }) => {
     try {
-      const res = (await api.getUserDbProfile(email)).data();
+      const res = await api.getUserDbProfile(email);
       if (res) {
         const result: DbData = {
           user: {

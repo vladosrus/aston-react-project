@@ -1,5 +1,4 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import { User } from 'firebase/auth';
 import { AuthContext } from '../contexts/auth-context';
 import { checkAuth } from '../../shared/api';
 import { userDbProfileSynchronized } from '../../features/user/user-db-profile-synchronized';
@@ -17,7 +16,7 @@ export const AuthProvider: FC<Props> = (props) => {
   const dispatch = useTypedDispatch();
 
   useEffect(() => {
-    checkAuth((user: User | null) => {
+    checkAuth((user) => {
       if (user?.email) {
         setAuth(true);
         dispatch(userDbProfileSynchronized(user.email));
@@ -29,7 +28,7 @@ export const AuthProvider: FC<Props> = (props) => {
   }, [dispatch]);
 
   return (
-    <AuthContext.Provider value={{ isAuth, isAuthChecking }}>
+    <AuthContext.Provider value={{ isAuth, isAuthChecking, setAuth }}>
       {props.children}
     </AuthContext.Provider>
   );

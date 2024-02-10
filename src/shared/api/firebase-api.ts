@@ -38,6 +38,7 @@ export const checkAuth = (callBack: (user: User | null) => void) => {
 
 export const logout = () => signOut(auth);
 
+// Функции для работы с данными в БД
 export const createUserDbProfile = async (user: RootUser<string>) => {
   await setDoc(doc(db, 'users', user.email), {
     id: user.id,
@@ -50,7 +51,7 @@ export const getUserDbProfile = async (email: string) => {
   const userRef = doc(db, 'users', email);
   const docSnap = await getDoc(userRef);
 
-  return docSnap;
+  return docSnap.data();
 };
 
 export const addToFavorites = async (email: string, photoId: string) => {
