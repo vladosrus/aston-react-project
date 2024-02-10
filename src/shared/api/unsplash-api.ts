@@ -1,4 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  transformInitialPhotos,
+  transformPhotoById,
+  transformPhotosByQuery
+} from '../lib/transform-responses';
 
 export const unsplashApi = createApi({
   reducerPath: 'unsplashApi',
@@ -17,38 +22,13 @@ export const unsplashApi = createApi({
           count: 10
         }
       }),
-      transformResponse: (res: RawUnsplashData[]) =>
-        res.map((photo: RawUnsplashData) => {
-          return {
-            id: photo.id,
-            width: photo.width,
-            height: photo.height,
-            description: photo.description || '',
-            alt_description: photo.alt_description || '',
-            url: photo.urls.regular
-          };
-        })
+      transformResponse: transformInitialPhotos
     }),
     getPhotoById: build.query<FullPhotoInfo, string | undefined>({
       query: (id) => ({
         url: `/photos/${id}`
       }),
-      transformResponse: (photoInfo: RawUnsplashData) => {
-        return {
-          id: photoInfo.id,
-          width: photoInfo.width,
-          height: photoInfo.height,
-          description: photoInfo.description || '',
-          alt_description: photoInfo.alt_description || '',
-          url: photoInfo.urls.raw,
-          creator: {
-            name: photoInfo.user.name,
-            profileName: photoInfo.user.username,
-            profileLink: photoInfo.user.links.html,
-            country: photoInfo.user.location
-          }
-        };
-      }
+      transformResponse: transformPhotoById
     }),
     getPhotosByQuery: build.query<Photo[], string | undefined>({
       query: (query) => ({
@@ -57,18 +37,7 @@ export const unsplashApi = createApi({
           query: query
         }
       }),
-      transformResponse: (res: SearchUnsplashData): Photo[] => {
-        return res.results.map((photo) => {
-          return {
-            id: photo.id,
-            width: photo.width,
-            height: photo.height,
-            description: photo.description || '',
-            alt_description: photo.alt_description || '',
-            url: photo.urls.small
-          };
-        });
-      }
+      transformResponse: transformPhotosByQuery
     })
   })
 });
@@ -120,11 +89,6 @@ export interface RawUnsplashData {
     location: string;
   };
   tags: [];
-}
-interface SearchUnsplashData {
-  total: number;
-  total_pages: number;
-  results: RawUnsplashData[];
 }
 
 export interface Photo {

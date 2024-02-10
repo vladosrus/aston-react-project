@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { memo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -7,8 +8,12 @@ import { PhotoList } from '../../widgets/photo-list/photo-list';
 import { useGetPhotosByQueryQuery } from '../../shared/api';
 import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 import { Fallback } from '../../shared/ui/fallback/fallback';
+import { useTheme } from '../../features/theme/lib/use-theme';
+
+import s from './search-page.module.css';
 
 const SearchPage = memo(() => {
+  const { theme } = useTheme();
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
   const {
@@ -31,7 +36,9 @@ const SearchPage = memo(() => {
           ) : list?.length ? (
             <PhotoList photoList={list} error={error} />
           ) : (
-            <h2>{'По вашему запросу ничего не нашлось :('}</h2>
+            <h2 className={clsx(s.text, { [s.textDark]: theme === 'dark' })}>
+              {'По вашему запросу ничего не нашлось :('}
+            </h2>
           )}
           {/* Если будет ошибка запроса данных, то отработает ErrorBoundary */}
           {!list && <PhotoList photoList={list} error={error} />}
