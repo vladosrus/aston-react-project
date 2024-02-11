@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import { FC, memo } from 'react';
+import { memo } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../lib/use-auth';
@@ -14,7 +15,7 @@ type Props = {
   onSubmit: (data: Inputs) => void;
 };
 
-export const AuthForm: FC<Props> = memo((props) => {
+const Auth_Form = (props: Props) => {
   const { theme } = useTheme();
   const {
     register,
@@ -154,4 +155,11 @@ export const AuthForm: FC<Props> = memo((props) => {
       </div>
     </form>
   );
-});
+};
+
+export const AuthForm = memo(Auth_Form);
+
+Auth_Form.propTypes = {
+  name: PropTypes.oneOf(['Авторизация', 'Регистрация']).isRequired,
+  onSubmit: PropTypes.func.isRequired
+};

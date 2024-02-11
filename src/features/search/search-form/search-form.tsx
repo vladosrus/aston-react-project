@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC, memo, useCallback, useContext, useState } from 'react';
+import { memo, useCallback, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useTypedDispatch } from '../../../shared/lib/use-typed-dispatch';
@@ -15,7 +15,7 @@ type Props = {
   prevQuery?: string;
 };
 
-export const SearchForm: FC<Props> = memo((props) => {
+export const SearchForm = memo((props: Props) => {
   const {
     register,
     watch,

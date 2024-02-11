@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC, memo } from 'react';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { paths } from '../../../shared/model/paths';
 
@@ -10,7 +10,7 @@ type Props = {
   suggestion: Photo;
 };
 
-export const Suggestion: FC<Props> = memo((props) => {
+export const Suggestion = memo((props: Props) => {
   return (
     <li
       className={clsx(s.suggestion, {

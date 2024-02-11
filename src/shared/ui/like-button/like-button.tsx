@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC, memo } from 'react';
+import { memo } from 'react';
 
 import s from './like-button.module.css';
 
@@ -8,7 +8,7 @@ type Props = {
   handleFavoriteButtonClick: () => void;
 };
 
-export const LikeButton: FC<Props> = memo((props) => {
+export const LikeButton = memo((props: Props) => {
   return (
     <button
       type="button"

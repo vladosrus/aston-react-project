@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC, ReactNode, memo, useContext } from 'react';
+import { ReactNode, memo, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FullPhotoInfo } from '../../shared/api/unsplash-api';
@@ -17,7 +17,7 @@ type Props = {
   error: FetchBaseQueryError | SerializedError | undefined;
 };
 
-export const PhotoDetails: FC<Props> = memo((props) => {
+export const PhotoDetails = memo((props: Props) => {
   //Необходимо для вывода информации об произошедшей ошибке
   if (props.error) {
     if ('status' in props.error) {

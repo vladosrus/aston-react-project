@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC, memo } from 'react';
+import { memo } from 'react';
 import { useGetPhotoByIdQuery } from '../../../../shared/api';
 import { PagePreloader } from '../../../../shared/ui/page-preloader/page-preloader';
 import { PhotoCard } from '../../../../shared/ui/photo/photo-card';
@@ -10,7 +10,7 @@ type Props = {
   id: string;
 };
 
-export const FavoriteCard: FC<Props> = memo((props) => {
+export const FavoriteCard = memo((props: Props) => {
   const { data: photoInfo, isLoading, error } = useGetPhotoByIdQuery(props.id);
 
   //Необходимо для вывода информации об произошедшей ошибке

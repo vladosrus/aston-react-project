@@ -1,4 +1,4 @@
-import { FC, memo, useContext } from 'react';
+import { memo, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Photo } from '../../api/unsplash-api';
 import { LikeButton } from '../like-button/like-button';
@@ -13,7 +13,7 @@ type Props = {
   photoInfo: Photo;
 };
 
-export const PhotoCard: FC<Props> = memo((props) => {
+export const PhotoCard = memo((props: Props) => {
   const { isAuth } = useContext(AuthContext);
 
   const { isFavorite, isLoading, handleFavoriteButtonClick } = useFavorites(

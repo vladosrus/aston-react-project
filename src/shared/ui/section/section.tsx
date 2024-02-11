@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC, memo } from 'react';
+import { memo } from 'react';
 import { useTheme } from '../../../features/theme/lib/use-theme';
 
 import s from './section.module.css';
@@ -9,7 +9,7 @@ type Props = {
   children?: JSX.Element;
 };
 
-export const Section: FC<Props> = memo((props) => {
+export const Section = memo((props: Props) => {
   const { theme } = useTheme();
   return (
     <section

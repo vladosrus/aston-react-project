@@ -1,4 +1,5 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { AuthContext } from '../contexts/auth-context';
 import { checkAuth } from '../../shared/api';
 import { userDbProfileSynchronized } from '../../features/user/user-db-profile-synchronized';
@@ -8,7 +9,7 @@ type Props = {
   children: JSX.Element;
 };
 
-export const AuthProvider: FC<Props> = (props) => {
+export const AuthProvider = (props: Props) => {
   const [isAuth, setIsAuth] = useState(false);
   const [isAuthChecking, setIsAuthChecking] = useState(true);
   const memoValues = useMemo(
@@ -38,4 +39,8 @@ export const AuthProvider: FC<Props> = (props) => {
       {props.children}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };

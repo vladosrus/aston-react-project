@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { memo } from 'react';
 import { Suggestion } from '../suggestion/suggestion';
 import { useGetPhotosByQueryQuery } from '../../../shared/api/unsplash-api';
 
@@ -9,7 +9,7 @@ type Props = {
   query: string;
 };
 
-export const SuggestionsList: FC<Props> = memo((props) => {
+export const SuggestionsList = memo((props: Props) => {
   const { data: suggestions, isLoading } = useGetPhotosByQueryQuery(
     props.query
   );

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { FC, memo } from 'react';
+import { memo } from 'react';
 import { SerializedError } from '@reduxjs/toolkit';
 import { PhotoCard } from '../../shared/ui/photo/photo-card';
 import { FavoriteCard } from '../../features/favorites/ui/favorite-card/favorite-card';
@@ -14,7 +14,7 @@ type Props = {
   error?: FetchBaseQueryError | SerializedError | undefined;
 };
 
-export const PhotoList: FC<Props> = memo((props) => {
+export const PhotoList = memo((props: Props) => {
   //Необходимо для вывода информации об произошедшей ошибке
   if (props.error) {
     if ('status' in props.error) {
