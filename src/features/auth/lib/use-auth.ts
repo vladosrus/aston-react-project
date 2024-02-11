@@ -21,7 +21,7 @@ export const useAuth = () => {
 
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
-  const { setAuth } = useContext(AuthContext);
+  const { setIsAuth } = useContext(AuthContext);
 
   const handleRegistration = useCallback(
     (date: Inputs) => {
@@ -30,11 +30,11 @@ export const useAuth = () => {
           res.type === 'auth/userRegistered/fulfilled' &&
           import.meta.env.VITE_REMOTE_STORE === 'ls'
         ) {
-          setAuth(true);
+          setIsAuth(true);
         }
       });
     },
-    [dispatch, setAuth]
+    [dispatch, setIsAuth]
   );
   const handleLogin = useCallback(
     (data: Inputs) => {
@@ -43,11 +43,11 @@ export const useAuth = () => {
           res.type === 'auth/userLoggedIn/fulfilled' &&
           import.meta.env.VITE_REMOTE_STORE === 'ls'
         ) {
-          setAuth(true);
+          setIsAuth(true);
         }
       });
     },
-    [dispatch, setAuth]
+    [dispatch, setIsAuth]
   );
 
   const handleLogout = useCallback(() => {
@@ -56,11 +56,11 @@ export const useAuth = () => {
         res.type === 'auth/userLoggedOut/fulfilled' &&
         import.meta.env.VITE_REMOTE_STORE === 'ls'
       ) {
-        setAuth(false);
+        setIsAuth(false);
       }
     });
     navigate(paths.homePage);
-  }, [dispatch, navigate, setAuth]);
+  }, [dispatch, navigate, setIsAuth]);
 
   return {
     isLoginLoading,
