@@ -20,7 +20,7 @@
 - [x] Есть применение `Контекст API`: [auth-context.ts](https://github.com/vladosrus/aston-react-project/blob/main/src/app/contexts/auth-context.ts), [auth-provider.tsx](https://github.com/vladosrus/aston-react-project/blob/main/src/app/providers/auth-provider.tsx)
 - [x] Есть применение `предохранителя`: [home-page.tsx](https://github.com/vladosrus/aston-react-project/blob/main/src/pages/home-page/home-page.tsx)
 - [x] Есть хотя бы один `кастомный хук`: [use-favorites.ts](https://github.com/vladosrus/aston-react-project/blob/main/src/features/favorites/lib/use-favorites.ts)
-- [ ] Несколько компонентов используют `PropTypes`: в Vite нет такой возможности, все `Props` типизированы через `TypeScript`
+- [x] Несколько компонентов используют `PropTypes`: [auth-form.tsx](https://github.com/vladosrus/aston-react-project/blob/main/src/features/auth/ui/auth-form/auth-form.tsx), [auth-provider.tsx](https://github.com/vladosrus/aston-react-project/blob/main/src/app/providers/auth-provider.tsx)
 - [x] Поиск не должен триггерить много запросов к серверу (`debounce`): [use-debounce.tsx](https://github.com/vladosrus/aston-react-project/blob/main/src/shared/lib/use-debounce.tsx)
 - [x] Есть применение `lazy + Suspense`: [lasy](https://github.com/vladosrus/aston-react-project/blob/main/src/pages/routing/routing.tsx), [Suspense](https://github.com/vladosrus/aston-react-project/blob/main/src/app/providers/router-provider.tsx)
 
@@ -47,3 +47,8 @@
 - [x] Использовалась библиотека `clsx` для удобства работы с классами
 - [x] При работе со стилями использовались `CSS Modules`
 - [x] Кодовая база организована по методологи [Feature-Sliced Design](https://feature-sliced.design/ru/)
+
+## Что можно добавить в будущем:
+
+- Адаптацию сайта под мобильные устройства;
+- Реализовать кнопку "Больше фотографий". Клик по ней будет подгружать ещё несколько фото;
