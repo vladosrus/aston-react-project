@@ -9,26 +9,32 @@ type Props = {
 };
 
 export const AuthProvider: FC<Props> = (props) => {
-  const [auth, setAuth] = useState(false);
-  const [authChecking, setAuthChecking] = useState(true);
-  const isAuth = useMemo(() => auth, [auth]);
-  const isAuthChecking = useMemo(() => authChecking, [authChecking]);
+  const [isAuth, setIsAuth] = useState(false);
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
+  const memoValues = useMemo(
+    () => ({
+      isAuth,
+      isAuthChecking,
+      setIsAuth
+    }),
+    [isAuth, isAuthChecking, setIsAuth]
+  );
   const dispatch = useTypedDispatch();
 
   useEffect(() => {
     checkAuth((user) => {
       if (user?.email) {
-        setAuth(true);
+        setIsAuth(true);
         dispatch(userDbProfileSynchronized(user.email));
       } else {
-        setAuth(false);
+        setIsAuth(false);
       }
-      setAuthChecking(false);
+      setIsAuthChecking(false);
     });
   }, [dispatch]);
 
   return (
-    <AuthContext.Provider value={{ isAuth, isAuthChecking, setAuth }}>
+    <AuthContext.Provider value={memoValues}>
       {props.children}
     </AuthContext.Provider>
   );
