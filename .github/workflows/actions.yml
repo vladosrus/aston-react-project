@@ -56,15 +56,21 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Устанавливаем SSH ключи
+        run: |
+          set -eu
+          mkdir "$HOME/.ssh"
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" >> "$HOME/.ssh/id_rsa"
+          chmod 600 "$HOME/.ssh/id_rsa"
+
       - name: Устанавливаем зависимости
         run: npm ci
 
-      - name: Создаём build и отправляем его на сайт
+      - name: Создаём build и отправляем его на сервер
         run: |
-          git config --global user.email ${{ secrets.MY_EMAIL }}
-          git config --global user.name ${{ secrets.MY_NAME }}
-          git remote set-url origin ${{ secrets.MY_ORIGIN_ADDRESS }}
           npm run deploy
+          scp -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no -r dist/* ${{ secrets.DEPLOY_SERVER_INFO }}
+
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
@@ -76,4 +82,3 @@ jobs:
           VITE_UNSPLASH_BASE_URL: ${{ secrets.VITE_UNSPLASH_BASE_URL }}
           VITE_UNSPLASH_AUTH_KEY: ${{ secrets.VITE_UNSPLASH_AUTH_KEY }}
           VITE_REMOTE_STORE: ${{ secrets.VITE_REMOTE_STORE }}
-        # address: https://{{ my_GitHub_token }}@github.com/path/to/repository
