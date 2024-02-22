@@ -8,7 +8,7 @@ type Props = {
 
 export const RouterProvider = (props: Props) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/aston-react-project">
       <Suspense fallback={<PagePreloader />}>{props.children}</Suspense>
     </BrowserRouter>
   );

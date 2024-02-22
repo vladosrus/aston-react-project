@@ -7,5 +7,8 @@ import svgr from 'vite-plugin-svgr';
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
   base: '/aston-react-project',
-  plugins: [react(), svgr()]
+  plugins: [react(), svgr()],
+  server: {
+    open: true
+  }
 });

@@ -1,5 +1,5 @@
 export const paths = {
-  homePage: '/aston-react-project/',
+  homePage: '/',
   detailsPage: 'photos/:id',
   searchPage: 'search',
   historyPage: 'history',
