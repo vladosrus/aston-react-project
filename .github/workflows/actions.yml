@@ -15,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['21.x']
+        node-version: ['22.x']
     steps:
       - name: Проверяем код репозитория
         uses: actions/checkout@v4
 
       - name: Настраиваем Node.js версии ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -44,36 +44,52 @@ jobs:
     needs: CI
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: ['21.x']
+    concurrency:
+      group: deploy
+      cancel-in-progress: false
     steps:
       - name: Проверяем код репозитория
         uses: actions/checkout@v4
 
-      - name: Настраиваем Node.js версии ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Устанавливаем SSH ключи
-        run: |
-          set -eu
-          mkdir "$HOME/.ssh"
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" >> "$HOME/.ssh/id_rsa"
-          chmod 600 "$HOME/.ssh/id_rsa"
+          node-version: '22'
 
       - name: Устанавливаем зависимости
         run: npm ci
 
-      - name: Создаём build и отправляем его на сервер
-        run: |
-          git config --global user.email ${{ secrets.MY_EMAIL }}
-          git config --global user.name ${{ secrets.MY_NAME }}
-          git remote set-url origin ${{ secrets.MY_ORIGIN_ADDRESS }}
-          npm run deploy
-          scp -i $HOME/.ssh/id_rsa -o StrictHostKeyChecking=no -r dist/* ${{ secrets.DEPLOY_SERVER_INFO }}
+      - name: Собираем проект
+        run: npm run build
+        env:
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+          VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}
+          VITE_UNSPLASH_BASE_URL: ${{ secrets.VITE_UNSPLASH_BASE_URL }}
+          VITE_UNSPLASH_AUTH_KEY: ${{ secrets.VITE_UNSPLASH_AUTH_KEY }}
+          VITE_REMOTE_STORE: ${{ secrets.VITE_REMOTE_STORE }}
 
+      - name: Отправляем результат на сервер
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          install -m 700 -d "$HOME/.ssh"
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$HOME/.ssh/deploy_key"
+          chmod 600 "$HOME/.ssh/deploy_key"
+          echo "45.135.233.126 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL2/ITDGVDpKjQN/S2k/qXVcZdoUm7X4QBfbPAwbydFG" > "$HOME/.ssh/known_hosts"
+          tar -czf - -C dist . | ssh -T -i "$HOME/.ssh/deploy_key" -o BatchMode=yes deployer@45.135.233.126
+
+      - name: Обновляем GitHub Pages
+        continue-on-error: true
+        run: |
+          git config --global user.email "${{ secrets.MY_EMAIL }}"
+          git config --global user.name "${{ secrets.MY_NAME }}"
+          git remote set-url origin "${{ secrets.MY_ORIGIN_ADDRESS }}"
+          npm run deploy
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
