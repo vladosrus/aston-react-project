@@ -5,7 +5,7 @@
 ## Что выполнено:
 
 - Использовался API: [Unsplash API](https://unsplash.com/documentation)
-- Ссылка на реализацию: [https://vladosrus...](https://vladosrus.github.io/aston-react-project/)
+- Ссылка на реализацию: [https://vladislav-chikov-projects.ru/aston-react-project/](https://vladislav-chikov-projects.ru/aston-react-project/)
 
 ### 1 уровень (обязательный - необходимый минимум)
 
