@@ -21,3 +21,30 @@
   grid-column: span 1;
   grid-row: span 2;
 }
+
+.loadMoreButton {
+  display: block;
+  margin: 40px auto 0;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 20px 40px;
+  color: var(--light-theme-white-text-color);
+  background-color: var(--light-theme-accent-color);
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.loadMoreButton:hover {
+  transform: scale(1.07);
+}
+.loadMoreButton:disabled {
+  cursor: default;
+  transform: scale(1);
+  opacity: 0.6;
+}
+.loadMoreButtonDark {
+  color: var(--dark-theme-accent-background-color);
+  background-color: var(--dark-theme-accent-color);
+}

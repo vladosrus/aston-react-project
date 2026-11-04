@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Suggestion } from '../suggestion/suggestion';
-import { useGetPhotosByQueryQuery } from '../../../shared/api/unsplash-api';
+import { useGetSuggestionsByQueryQuery } from '../../../shared/api/unsplash-api';
 
 import s from './suggestions-list.module.css';
 import type { Photo } from '../../../shared/api/unsplash-api';
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const SuggestionsList = memo((props: Props) => {
-  const { data: suggestions, isLoading } = useGetPhotosByQueryQuery(
+  const { data: suggestions, isLoading } = useGetSuggestionsByQueryQuery(
     props.query
   );
 

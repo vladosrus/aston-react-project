@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { memo } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { SearchForm } from '../../features/search/search-form/search-form';
@@ -15,26 +15,40 @@ import s from './search-page.module.css';
 const SearchPage = memo(() => {
   const { theme } = useTheme();
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('query');
-  const {
-    data: list,
-    isLoading,
-    error
-  } = useGetPhotosByQueryQuery(query || '', {
-    skip: query ? query.length <= 2 : true // если не передали запрос или запрос маленький, то не идём за данными
-  });
+  const query = searchParams.get('query') || '';
+  const [pagination, setPagination] = useState({ query, page: 1 });
+  const page = pagination.query === query ? pagination.page : 1;
+
+  const { data, isLoading, isFetching, error } = useGetPhotosByQueryQuery(
+    { query, page },
+    {
+      skip: query.length <= 2
+    }
+  );
+  const list = data?.photos;
+
+  const handleLoadMore = useCallback(
+    () => setPagination({ query, page: page + 1 }),
+    [query, page]
+  );
 
   return (
     <>
       <Section type="top">
-        <SearchForm prevQuery={query || ''} />
+        <SearchForm prevQuery={query} />
       </Section>
       <Section type="main">
         <ErrorBoundary FallbackComponent={Fallback}>
           {isLoading ? (
             <PagePreloader />
           ) : list?.length ? (
-            <PhotoList photoList={list} error={error} />
+            <PhotoList
+              photoList={list}
+              error={error}
+              onLoadMore={handleLoadMore}
+              hasMore={page < (data?.totalPages ?? 0)}
+              isLoadingMore={isFetching}
+            />
           ) : (
             <h2 className={clsx(s.text, { [s.textDark]: theme === 'dark' })}>
               {'По вашему запросу ничего не нашлось :('}

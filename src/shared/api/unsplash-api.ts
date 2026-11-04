@@ -2,8 +2,18 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   transformInitialPhotos,
   transformPhotoById,
-  transformPhotosByQuery
+  transformPhotosByQuery,
+  transformSuggestions
 } from '../lib/transform-responses';
+
+export const PHOTOS_PER_PAGE = 10;
+
+// Unsplash может вернуть уже показанное фото (особенно /photos/random),
+// а дубли ломают key в списке
+const mergeUniquePhotos = (current: Photo[], incoming: Photo[]) => {
+  const ids = new Set(current.map((photo) => photo.id));
+  return [...current, ...incoming.filter((photo) => !ids.has(photo.id))];
+};
 
 export const unsplashApi = createApi({
   reducerPath: 'unsplashApi',
@@ -15,14 +25,18 @@ export const unsplashApi = createApi({
     }
   }),
   endpoints: (build) => ({
-    getInitialPhotos: build.query<Photo[], void>({
+    // Аргумент — номер "страницы". Все страницы хранятся в одной записи кэша,
+    // новые фото дописываются в конец списка
+    getInitialPhotos: build.query<Photo[], number>({
       query: () => ({
         url: '/photos/random',
-        params: {
-          count: 10
-        }
+        params: { count: PHOTOS_PER_PAGE }
       }),
-      transformResponse: transformInitialPhotos
+      transformResponse: transformInitialPhotos,
+      serializeQueryArgs: ({ endpointName }) => endpointName,
+      merge: (currentCache, newPhotos, { arg: page }) =>
+        page === 1 ? newPhotos : mergeUniquePhotos(currentCache, newPhotos),
+      forceRefetch: ({ currentArg, previousArg }) => currentArg !== previousArg
     }),
     getPhotoById: build.query<FullPhotoInfo, string | undefined>({
       query: (id) => ({
@@ -30,14 +44,34 @@ export const unsplashApi = createApi({
       }),
       transformResponse: transformPhotoById
     }),
-    getPhotosByQuery: build.query<Photo[], string | undefined>({
+    // Отдельный эндпоинт, чтобы подсказки не сбрасывали подгруженные страницы
+    // в кэше getPhotosByQuery для того же запроса
+    getSuggestionsByQuery: build.query<Photo[], string>({
       query: (query) => ({
         url: `/search/photos`,
-        params: {
-          query: query
-        }
+        params: { query, per_page: PHOTOS_PER_PAGE }
       }),
-      transformResponse: transformPhotosByQuery
+      transformResponse: transformSuggestions
+    }),
+    // Для каждого поискового запроса — своя запись кэша, страницы склеиваются
+    getPhotosByQuery: build.query<PhotosByQuery, PhotosByQueryArgs>({
+      query: ({ query, page }) => ({
+        url: `/search/photos`,
+        params: { query, page, per_page: PHOTOS_PER_PAGE }
+      }),
+      transformResponse: transformPhotosByQuery,
+      serializeQueryArgs: ({ endpointName, queryArgs }) =>
+        `${endpointName}(${queryArgs.query})`,
+      merge: (currentCache, newData, { arg }) =>
+        arg.page === 1
+          ? newData
+          : {
+              photos: mergeUniquePhotos(currentCache.photos, newData.photos),
+              totalPages: newData.totalPages
+            },
+      forceRefetch: ({ currentArg, previousArg }) =>
+        currentArg?.query !== previousArg?.query ||
+        currentArg?.page !== previousArg?.page
     })
   })
 });
@@ -45,7 +79,8 @@ export const unsplashApi = createApi({
 export const {
   useGetInitialPhotosQuery,
   useGetPhotoByIdQuery,
-  useGetPhotosByQueryQuery
+  useGetPhotosByQueryQuery,
+  useGetSuggestionsByQueryQuery
 } = unsplashApi;
 
 export interface RawUnsplashData {
@@ -98,6 +133,16 @@ export interface Photo {
   description: string;
   alt_description: string;
   url: string;
+}
+
+export interface PhotosByQuery {
+  photos: Photo[];
+  totalPages: number;
+}
+
+export interface PhotosByQueryArgs {
+  query: string;
+  page: number;
 }
 
 export interface FullPhotoInfo extends Photo {

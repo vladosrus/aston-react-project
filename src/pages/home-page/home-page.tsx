@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { SearchForm } from '../../features/search/search-form/search-form';
 import { Section } from '../../shared/ui/section/section';
@@ -8,7 +8,15 @@ import { PagePreloader } from '../../shared/ui/page-preloader/page-preloader';
 import { Fallback } from '../../shared/ui/fallback/fallback';
 
 const HomePage = memo(() => {
-  const { data: list, isLoading, error } = useGetInitialPhotosQuery();
+  const [page, setPage] = useState(1);
+  const {
+    data: list,
+    isLoading,
+    isFetching,
+    error
+  } = useGetInitialPhotosQuery(page);
+
+  const handleLoadMore = useCallback(() => setPage((prev) => prev + 1), []);
 
   return (
     <>
@@ -20,7 +28,13 @@ const HomePage = memo(() => {
           {isLoading ? (
             <PagePreloader />
           ) : (
-            <PhotoList photoList={list} error={error} />
+            <PhotoList
+              photoList={list}
+              error={error}
+              onLoadMore={handleLoadMore}
+              hasMore
+              isLoadingMore={isFetching}
+            />
           )}
         </ErrorBoundary>
       </Section>

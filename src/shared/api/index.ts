@@ -3,5 +3,6 @@ export {
   unsplashApi,
   useGetInitialPhotosQuery,
   useGetPhotoByIdQuery,
-  useGetPhotosByQueryQuery
+  useGetPhotosByQueryQuery,
+  useGetSuggestionsByQueryQuery
 } from './unsplash-api';

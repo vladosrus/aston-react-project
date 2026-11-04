@@ -1,4 +1,8 @@
-import type { Photo, RawUnsplashData } from '../api/unsplash-api';
+import type {
+  Photo,
+  PhotosByQuery,
+  RawUnsplashData
+} from '../api/unsplash-api';
 
 interface SearchUnsplashData {
   total: number;
@@ -33,15 +37,22 @@ export const transformPhotoById = (photoInfo: RawUnsplashData) => {
     }
   };
 };
-export const transformPhotosByQuery = (res: SearchUnsplashData): Photo[] => {
-  return res.results.map((photo) => {
-    return {
-      id: photo.id,
-      width: photo.width,
-      height: photo.height,
-      description: photo.description || '',
-      alt_description: photo.alt_description || '',
-      url: photo.urls.small
-    };
-  });
+export const transformSuggestions = (res: SearchUnsplashData): Photo[] =>
+  transformPhotosByQuery(res).photos;
+export const transformPhotosByQuery = (
+  res: SearchUnsplashData
+): PhotosByQuery => {
+  return {
+    totalPages: res.total_pages,
+    photos: res.results.map((photo) => {
+      return {
+        id: photo.id,
+        width: photo.width,
+        height: photo.height,
+        description: photo.description || '',
+        alt_description: photo.alt_description || '',
+        url: photo.urls.small
+      };
+    })
+  };
 };
